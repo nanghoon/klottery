@@ -136,15 +136,30 @@
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.2.0</version>
 		</dependency>
-        <!--
-        <dependency>
-            <groupId>ojdbc</groupId>
-            <artifactId>ojdbc</artifactId>
-            <version>14</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc-14.jar</systemPath>
-        </dependency>
-        -->
+		<!-- file-upload -->
+		<dependency> 
+			<groupId>commons-io</groupId> 
+			<artifactId>commons-io</artifactId> 
+			<version>2.0.1</version> 
+		</dependency> 
+		<dependency> 
+			<groupId>commons-fileupload</groupId> 
+			<artifactId>commons-fileupload</artifactId> 
+			<version>1.2.2</version> 
+		</dependency>
+	     <!-- ajax json -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<!-- 크롤링 위한 jsoup -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.11.2</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
