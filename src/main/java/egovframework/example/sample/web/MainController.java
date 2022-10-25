@@ -1,11 +1,14 @@
 package egovframework.example.sample.web;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -204,5 +207,67 @@ public class MainController {
 		obj.put("result", "suc");
 		obj.put("msg", "가입 완료되었습니다");
 		return obj.toJSONString();
+	}
+	
+	@RequestMapping(value="/login.do")
+	public String login(HttpServletRequest request , Model model){
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null){
+			for(int i=0; i<cookies.length; i++){
+				if(cookies[i].getName().equals("JSESSIONID")) continue;
+				model.addAttribute(cookies[i].getName(), cookies[i].getValue());
+			}
+		}		
+		return "user/login";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/loginProcess.do", produces = "application/json; charset=utf8")
+	public String loginProcess(HttpServletRequest request , HttpServletResponse response){
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		String saveId = request.getParameter("saveId");
+		HttpSession session = request.getSession();
+		JSONObject obj = new JSONObject();
+		obj.put("result", "fail");
+		if(Utils.isNull(id)){
+			obj.put("msg", "아이디를 입력하세요");
+			return obj.toJSONString();
+		}
+		if(Utils.isNull(pw)){
+			obj.put("msg", "비밀번호를 입력하세요");
+			return obj.toJSONString();
+		}
+		EgovMap in = new EgovMap();
+		in.put("id", id);
+		in.put("pw", pw);
+		EgovMap info = (EgovMap)sampleDAO.select("checkLogin" , in);
+		if(info == null){
+			obj.put("msg", "아이디 혹은 비밀번호를 확인해주세요");
+			return obj.toJSONString();
+		}else{
+			session.setAttribute("userIdx", info.get("idx"));
+			session.setAttribute("userName", info.get("name"));
+			session.setAttribute("userId", info.get("id"));
+			if(!Utils.isNull(saveId)){
+				Cookie cookie = new Cookie("cookieId" , id);
+				cookie.setPath(request.getContextPath());
+				cookie.setMaxAge(60*60*24*7); // 7일 
+				response.addCookie(cookie);				
+			}else{
+				Cookie[] cookies = request.getCookies();
+				if(cookies != null){
+					for(int i=0; i<cookies.length; i++){
+						if(cookies[i].getName().equals("cookieId")){
+							cookies[i].setMaxAge(0);
+							response.addCookie(cookies[i]);
+						}
+					}
+				}				
+			}
+			obj.put("result", "suc");
+			obj.put("msg", "로그인 성공");
+			return obj.toJSONString();
+		}
 	}
 }

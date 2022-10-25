@@ -55,5 +55,13 @@
 				  , now())
 		]]>
 	</insert>
+	<select id="checkLogin" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM member
+            where id = #id# and pw = #pw#
+            limit 1
+        ]]>
+	</select>
 </sqlMap>
 
