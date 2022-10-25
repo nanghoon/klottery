@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+
+	<select id="checkDupleId" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM member
+            where id = #id#
+            limit 1
+        ]]>
+	</select>
+	<select id="checkDupleEmail" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM member
+            where email = #email#
+            limit 1
+        ]]>
+	</select>
+	<insert id="insertMember">
+		<![CDATA[
+			INSERT INTO member
+				( name
+				  , id
+				  , pw
+				  , birth
+				  , phone
+				  , email
+		]]>
+		<isNotEmpty property="zip">, zip</isNotEmpty>
+		<isNotEmpty property="add1">, add1</isNotEmpty>
+		<isNotEmpty property="add2">, add2</isNotEmpty>
+		<![CDATA[
+				  , sms
+				  , mail
+				  , jdate)
+			VALUES ( #name#
+				  , #id#
+				  , #pw#
+				  , #birth#
+				  , #phone#
+				  , #email#
+		]]>
+		<isNotEmpty property="zip">, #zip#</isNotEmpty>
+		<isNotEmpty property="add1">, #add1#</isNotEmpty>
+		<isNotEmpty property="add2">, #add2#</isNotEmpty>
+		<![CDATA[
+				  , #sms#
+				  , #mail#
+				  , now())
+		]]>
+	</insert>
+</sqlMap>
+

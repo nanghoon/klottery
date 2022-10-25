@@ -22,6 +22,7 @@
         <property name="interceptors">
             <list>
                 <ref bean="localeChangeInterceptor" />
+                <ref bean="accessAuthorityInterceptor" />
             </list>
         </property>
     </bean>
@@ -31,6 +32,23 @@
     <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
         <property name="paramName" value="language" />
     </bean>
+    <!-- 인터셉터 위해 추가  -->
+	<bean id="accessAuthorityInterceptor" class="egovframework.example.sample.web.util.AccessInterceptor">  
+		<property name="urls">
+			<list> <!-- interceptor 제외할 url list -->
+				<value>/klottery/admin/login.do</value>   
+				<value>/klottery/admin/loginProcess.do</value>    
+				<value>/klottery/login.do</value>   
+				<value>/klottery/loginProcess.do</value>   
+				<value>/klottery/dupleChk.do</value>   
+				<value>/klottery/auth.do</value>   
+				<value>/klottery/authChk.do</value>   
+				<value>/klottery/join.do</value>   
+				<value>/klottery/joinProcess.do</value>   
+			</list>
+		</property>
+	</bean>      
+ 	<!-- //인터셉터 위해 추가  -->
 
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="defaultErrorView" value="cmmn/egovError"/>

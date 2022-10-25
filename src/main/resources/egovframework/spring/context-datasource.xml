@@ -18,9 +18,9 @@
     
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/example?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=Asia/Seoul&amp;allowPublicKeyRetrieval=true" />
-        <property name="username" value="user"/>
-        <property name="password" value="password"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/klottery?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=Asia/Seoul&amp;allowPublicKeyRetrieval=true" />
+        <property name="username" value="klottery"/>
+        <property name="password" value="zpdlfhxjflqlalfqjsgh"/>
         <property name="validationQuery" value="select 1"/>
     </bean>
     
