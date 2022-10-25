@@ -131,10 +131,7 @@
 }
 
 .topbox {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   width: 100%;
   height: 77px;
   -webkit-box-pack: start;
@@ -145,7 +142,10 @@
 }
 
 .topbox.login {
-  display: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -2207,10 +2207,21 @@
 }
 
 .popframe.myball {
-  display: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .popframe.balldetail {
+  display: none;
+}
+
+.popframe.buynum {
+  display: none;
+}
+
+.popframe.scan {
   display: none;
 }
 
@@ -2270,6 +2281,10 @@
   box-shadow: none;
 }
 
+.popup._2 {
+  height: 500px;
+}
+
 .pop_msg {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -2312,10 +2327,10 @@
   width: 100%;
   min-width: 100%;
   border-bottom: 2px solid #4b535f;
-  font-family: 'Typo ssangmundongb', sans-serif;
+  font-family: 'Black Han Sans', sans-serif;
   color: #515864;
-  font-size: 16px;
-  line-height: 28px;
+  font-size: 20px;
+  line-height: 30px;
   font-weight: 400;
   text-align: left;
 }
@@ -3309,10 +3324,7 @@
 }
 
 .buy_content_wrap {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   width: 1100px;
   margin-right: auto;
   margin-left: auto;
@@ -5194,6 +5206,10 @@
   font-weight: 500;
 }
 
+.text-block-59._1 {
+  width: 25%;
+}
+
 .button-4 {
   margin-left: 5px;
   background-color: #403f3f;
@@ -5220,10 +5236,155 @@
   width: 31%;
 }
 
+.myball_list-copy {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  padding-right: 10px;
+  padding-left: 10px;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.myball-copy {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 10px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.myballbox-copy {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  padding-right: 20px;
+  padding-left: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.myball_list_box-copy {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.new_buy_content {
+  width: 1100px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.guidbox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 75%;
+  margin-right: auto;
+  margin-left: auto;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.image-33 {
+  width: 150px;
+  max-width: none;
+}
+
+.image-34 {
+  width: auto;
+  max-width: none;
+}
+
+.bannerbox3-copy {
+  width: 88%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.lotto_money-copy {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  color: #fff;
+  font-size: 50px;
+  line-height: 70px;
+  font-weight: 700;
+}
+
 @media screen and (max-width: 767px) {
   .topbox {
     display: none;
     height: 77px;
+  }
+
+  .topbox.login {
+    display: none;
   }
 
   .banner {
@@ -5582,6 +5743,14 @@
   }
 
   .popframe.balldetail {
+    display: none;
+  }
+
+  .popframe.buynum {
+    display: none;
+  }
+
+  .popframe.scan {
     display: none;
   }
 
@@ -6701,6 +6870,10 @@
 
   .image-32 {
     margin-top: 49px;
+  }
+
+  .bannerbox3-copy {
+    display: none;
   }
 }
 

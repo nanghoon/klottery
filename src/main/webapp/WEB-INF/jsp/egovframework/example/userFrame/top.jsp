@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <div class="top">
 	<div class="topbar">
 		<div class="topwrap-2">
@@ -335,7 +339,17 @@
 			</div>
 		</div>
 	</div>
-	<div class="topbox">
+	<div class="topbox login">
+		<c:if test="${userIdx != null}">
+			<div class="topwrap login">
+				<div class="text-block-49-copy">${userId}님 환영합니다.</div>
+				<div class="text-block-56">
+					<span class="text-span-6">보유포인트</span> 0
+				</div>
+				<div class="text-block-56">충전</div>
+				<div class="text-block-56">출금</div>
+			</div>
+		</c:if>
 		<div class="topwrap">
 			<a href="#" class="w-inline-block">
 				<img src="/klottery/webflow/images/logo.png" loading="lazy"
@@ -380,69 +394,18 @@
 					<div class="topmenu">이벤트</div>
 				</a>
 			</div>
-			<div class="topmenubox">
-				<a href="#" class="topmenubtn w-button">회원가입 </a> 
-				<a href="#" class="topmenubtn w-button">로그인</a>
-			</div>
-		</div>
-	</div>
-	<div class="topbox login">
-		<div class="topwrap login">
-			<div class="text-block-49-copy">ID님 환영합니다.</div>
-			<div class="text-block-56">
-				<span class="text-span-6">보유포인트</span> 0
-			</div>
-			<div class="text-block-56">충전</div>
-			<div class="text-block-56">출금</div>
-		</div>
-		<div class="topwrap">
-			<a href="#" class="w-inline-block">
-				<img src="/klottery/webflow/images/logo.png" loading="lazy"
-				srcset="/klottery/webflow/images/k-lottery로고-p-500.png 500w, /klottery/webflow/images/k-lottery로고-p-800.png 800w, /klottery/webflow/images/k-lottery로고-p-1080.png 1080w, /klottery/webflow/images/k-lottery로고-p-1600.png 1600w, /klottery/webflow/images/k-lottery로고-p-2000.png 2000w, /klottery/webflow/images/logo.png 2068w"
-				sizes="100vw" alt="" class="logo">
-			</a>
-			<div class="topmenubox">
-				<a href="#" class="topmenulink w-inline-block">
-					<div class="topmenu">복권소개</div>
-				</a> 
-				<a href="#" class="topmenulink w-inline-block">
-					<div class="topmenu">게임구매</div>
-				</a> 
-				<a href="#" class="topmenulink w-inline-block">
-					<div class="topmenu">당첨결과</div>
-				</a> 
-				<a href="#" class="topmenulink w-inline-block">
-					<div class="topmenu">고객센터</div>
-				</a> 
-				<a href="#" class="topmenulink w-inline-block">
-					<div class="topmenu">이벤트</div>
-				</a>
-				<div class="lotto_buy_pop click">
-					<a href="#" class="lottobox w-inline-block">
-						<img src="/klottery/webflow/images/mega_logo.png" loading="lazy"
-						srcset="/klottery/webflow/images/메가밀리언-로고-p-500.png 500w, /klottery/webflow/images/메가밀리언-로고-p-800.png 800w, /klottery/webflow/images/메가밀리언-로고-p-1080.png 1080w, /klottery/webflow/images/mega_logo.png 1200w"
-						sizes="100vw" alt="">
-						<div class="text-block-22">메가밀리언</div>
-						<div class="text-block-23">구매 바로가기</div> 
-					</a> 
-					<a href="#" class="lottobox w-inline-block">
-						<img src="/klottery/webflow/images/lotto_logo.png" loading="lazy" alt="">
-						<div class="text-block-22">동행복권</div>
-						<div class="text-block-23">구매 바로가기</div> 
-					</a> 
-					<a href="#" class="lottobox w-inline-block">
-						<img src="/klottery/webflow/images/power_logo.png" loading="lazy"
-						srcset="/klottery/webflow/images/power_logo-p-500.png 500w, /klottery/webflow/images/power_logo.png 505w"
-						sizes="100vw" alt="" class="image-14">
-						<div class="text-block-22">파워볼</div>
-						<div class="text-block-23">구매 바로가기</div> 
-					</a>
+			<c:if test="${userIdx == null}">
+				<div class="topmenubox">
+					<a href="/klottery/join.do" class="topmenubtn w-button">회원가입 </a> 
+					<a href="/klottery/login.do" class="topmenubtn w-button">로그인</a>
 				</div>
-			</div>
-			<div class="topmenubox">
-				<a href="#" class="topmenubtn w-button">마이페이지 </a> 
-				<a href="#" class="topmenubtn w-button">로그아웃</a>
-			</div>
+			</c:if>
+			<c:if test="${userIdx != null}">
+				<div class="topmenubox">
+					<a href="#" class="topmenubtn w-button click">마이페이지 </a> 
+					<a href="/klottery/logout.do" class="topmenubtn w-button">로그아웃</a>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </div>

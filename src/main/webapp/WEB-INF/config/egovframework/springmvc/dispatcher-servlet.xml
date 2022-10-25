@@ -13,6 +13,8 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
 
+	<bean id="initBean" class="egovframework.example.sample.web.util.Init" init-method="init"></bean>
+
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="webBindingInitializer">
             <bean class="egovframework.example.cmmn.web.EgovBindingInitializer"/>
@@ -68,11 +70,14 @@
 
     <!-- For Pagination Tag -->
     <bean id="imageRenderer" class="egovframework.example.cmmn.web.EgovImgPaginationRenderer"/>
-
+	<bean id="CustomPaginationRendererAdmin" class="egovframework.example.sample.web.util.CustomPaginationRendererAdmin"/>
+	<bean id="CustomPaginationRendererUser" class="egovframework.example.sample.web.util.CustomPaginationRendererUser"/>
     <bean id="paginationManager" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
         <property name="rendererType">
             <map>
                 <entry key="image" value-ref="imageRenderer"/>
+                <entry key="admin" value-ref="CustomPaginationRendererAdmin"/>
+               	<entry key="user" value-ref="CustomPaginationRendererUser"/>
             </map>
         </property>
     </bean>

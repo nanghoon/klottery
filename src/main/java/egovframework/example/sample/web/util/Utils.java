@@ -2,8 +2,12 @@ package egovframework.example.sample.web.util;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.math.BigInteger;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.time.LocalDate;
@@ -13,6 +17,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import egovframework.example.sample.service.impl.SampleDAO;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
@@ -96,6 +104,31 @@ public class Utils {
 			index = (int) (charArr.length * Math.random());
 			sb.append(charArr[index]);
 		}
+		return sb.toString();
+	}
+	
+	public static JSONArray readJsonArrFromUrl(String url) throws IOException, ParseException {
+		InputStream is = new URL(url).openStream();
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+			String jsonText = jsonReadAll(br);
+			
+			JSONParser p = new JSONParser();
+			JSONArray arr = (JSONArray) p.parse(jsonText);
+			return arr;
+		} finally {
+			is.close();
+		}
+	}
+	
+	private static String jsonReadAll(Reader reader) throws IOException {
+		StringBuilder sb = new StringBuilder();
+
+		int cp;
+		while ((cp = reader.read()) != -1) {
+			sb.append((char) cp);
+		}
+
 		return sb.toString();
 	}
 }
