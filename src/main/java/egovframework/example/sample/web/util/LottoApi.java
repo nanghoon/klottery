@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,10 @@ public class LottoApi {
 	@RequestMapping(value="/setResultPower.do")
 	public void setResultPowerUrl(){
 		setResultMegaPower(sampleDAO , 3);
+	}
+	@RequestMapping(value="/setResultLotto.do")
+	public void setResultLottoUrl(){
+		setResultLotto(sampleDAO);
 	}
 	
 	// 환율
@@ -205,13 +210,62 @@ public class LottoApi {
 				in.put("data", data);
 				System.out.println(in);
 				sampleDAO.insert("insertLottoResult",in);
-				Scheduler.setMega = false;
+				if(type == 1)Scheduler.setMega = false;
+				else Scheduler.setPower = false;
 				
 			}
 		} catch (Exception e) {
 			System.out.println("setResultMega Err : "+ e);
 		}
 	}
+	public static void setResultLotto(SampleDAO sampleDAO){
+		System.out.println("setResultLotto===============================================================");
+		String url = "https://dhlottery.co.kr/gameResult.do?method=byWin&wiselog=C_A_1_2";
+		Document doc = null;
+		try {
+			doc = Jsoup.connect(url).get();
+			String cnt = doc.select(".win_result h4 strong").text().replace("회", "");
+			EgovMap in = new EgovMap();
+			in.put("type", 3);
+			in.put("cnt", cnt);
+			System.out.println("타입과 회차 찾기 : " + in);
+			EgovMap info = (EgovMap)sampleDAO.select("checkRecentLotto" , in);
+			if(info == null){ // 해당 회차가 없을때만 실행
+				System.out.println("해당 회차 없음--------------------------");
+				// 볼 번호
+				Elements balllist = doc.select(".nums .win [class*=ball]");
+				for(int i=0; i<balllist.size(); i++){
+					in.put("num"+(i+1), balllist.get(i).text());
+				}
+				in.put("bnum", doc.select(".nums .bonus .ball1").text());
+				Elements resultList = doc.select("tbody tr");
+				// 1등 금액 
+				in.put("hit", resultList.get(0).select(".color_key1").text().replaceAll(",", "").replaceAll("원", ""));
+				// 추첨일 
+				String date = ""+doc.select(".win_result .desc").text().replaceAll("추첨", "").replace("(", "").replace(")", "").replaceAll(" ", "");
+				date +=" 20:00:00";
+				Date hitDate = new SimpleDateFormat("yyyy년MM월dd일 HH:mm:ss").parse(date);
+				in.put("rdate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(hitDate));
+				// 결과 0 이월 1 당첨 
+				in.put("result", Integer.parseInt(""+resultList.get(0).select("td:eq(2)").text()) > 0 ? 1 : 0);
+				// 1-9등 랭크 
+				String data = "1,"+in.get("hit")+","+resultList.get(0).select("td:eq(2)").text();
+				for(int i=1; i<resultList.size(); i++){
+					data +="|"+(i+1)+","
+							+resultList.get(i).select(".color_key1").text().replaceAll(",", "").replaceAll("원", "")
+							+","+resultList.get(i).select("td:eq(2)").text();
+				}
+				in.put("data", data);
+				System.out.println("in : " + in);
+				sampleDAO.insert("insertLottoResult",in);
+				Scheduler.setLotto = false;
+			}
+		} catch (Exception e) {
+			System.out.println("setResultLotto Err : "+ e);
+		}
+
+	}
+	
 	
 	private static String getMegaVideo(){
 		System.out.println("getMegaVideo===============================================================");
