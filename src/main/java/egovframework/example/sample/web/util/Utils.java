@@ -107,6 +107,35 @@ public class Utils {
 		return sb.toString();
 	}
 	
+	public static String getDayOfWeek(){
+		Calendar cal = Calendar.getInstance();
+		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+		String korDayOfWeek = "";
+		switch (dayOfWeek) {
+		    case 1:
+		        korDayOfWeek = "일";
+		        break;
+		    case 2:
+		        korDayOfWeek = "월";
+		        break;
+		    case 3:
+		        korDayOfWeek = "화";
+		        break;
+		    case 4:
+		        korDayOfWeek = "수";
+		        break;
+		    case 5:
+		        korDayOfWeek = "목";
+		        break;
+		    case 6:
+		        korDayOfWeek = "금";
+		        break;
+		    case 7:
+		        korDayOfWeek = "토";
+		        break;
+		}
+		return korDayOfWeek;
+	}
 	public static JSONArray readJsonArrFromUrl(String url) throws IOException, ParseException {
 		InputStream is = new URL(url).openStream();
 		try {

@@ -32,35 +32,46 @@
 						</div>
 					</div> -->
 					<div class="bannerbox3-copy">
-						<div class="lotto_money">
-							<div class="lotto_won">₩</div>
-							<div class="lotto_money"><fmt:formatNumber value="${mWon}"/></div>
-							<div class="lotto_money2">
-								<div class="moenytxt1">당첨금</div>
-								<div class="moenytxt2">억원</div>
+						<c:if test="${!mShow}">
+							<div class="lotto_money">
+								<div class="lotto_money-copy">추첨대기중</div>
 							</div>
-						</div>
+						</c:if>
+						<c:if test="${mShow}">
+							<div class="lotto_money">
+								<div class="lotto_won">₩</div>
+								<div class="lotto_money"><fmt:formatNumber value="${mWon}"/></div>
+								<div class="lotto_money2">
+									<div class="moenytxt1">당첨금</div>
+									<div class="moenytxt2">억원</div>
+								</div>
+							</div>
+						</c:if>
 					</div>
 					<div class="bannerbox4">
-						<div class="lotto_recent_date">직전회차 : WED / SEP 14</div>
+						<jsp:useBean id="javaDate" class="java.util.Date" />
+						<jsp:setProperty name="javaDate" property="time" value="${mega.rdate.time + 13*60*60*1000}"/>
+						<div class="lotto_recent_date">
+							직전회차 : <fmt:setLocale value="en_us" scope="session"/><fmt:formatDate value="${javaDate}" pattern="EEE / MMM dd"/>
+						</div>
 						<div class="lottoball">
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${mega.num1}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${mega.num2}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${mega.num3}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${mega.num4}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${mega.num5}</div>
 							</div>
 							<div class="bonusball">
-								<div class="bball_num">14</div>
+								<div class="bball_num">${mega.bnum}</div>
 							</div>
 						</div>
 						<a href="#" class="megabtn w-button">구매하기</a>

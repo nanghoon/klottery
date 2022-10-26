@@ -27,6 +27,7 @@ public class MainController {
 	@RequestMapping(value="/main.do")
 	public String main(Model model){
 		LottoApi.getMainData(model);
+		model.addAttribute("mega", sampleDAO.select("selectMostRecentLottoByType" ,1));
 		return "user/main";
 	}
 }

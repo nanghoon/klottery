@@ -2207,10 +2207,7 @@
 }
 
 .popframe.myball {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
 }
 
 .popframe.balldetail {
@@ -5348,7 +5345,7 @@
 }
 
 .bannerbox3-copy {
-  width: 88%;
+  width: 90%;
   margin-top: 15px;
   margin-bottom: 15px;
   padding-top: 25px;

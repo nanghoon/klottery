@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+
+	<select id="checkRecentLotto" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM lotto_result
+            where type = #type# and cnt = #cnt#
+            limit 1
+        ]]>
+	</select>
+	<select id="selectMostRecentLottoByType" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM lotto_result
+            where type = #type#
+            order by idx desc 
+            limit 1
+        ]]>
+	</select>
+	<insert id="insertLottoResult">
+		<![CDATA[
+			INSERT INTO lotto_result
+				( type
+				  , cnt
+				  , num1
+				  , num2
+				  , num3
+				  , num4
+				  , num5
+		]]>
+		<isNotEmpty property="num6">, num6</isNotEmpty>
+		<![CDATA[
+				  , bnum
+				  , hit
+				  , krate
+				  , rdate
+				  , result
+				  , data
+				  , vurl)
+			VALUES ( #type#
+				  , #cnt#
+				  , #num1#
+				  , #num2#
+				  , #num3#
+				  , #num4#
+				  , #num5#
+		]]>
+		<isNotEmpty property="num6">, #num6#</isNotEmpty>
+		<![CDATA[
+				  , #bnum#
+				  , #hit#
+				  , #krate#
+				  , #rdate#
+				  , #result#
+				  , #data#
+				  , #vurl# )
+		]]>
+	</insert>
+</sqlMap>
+
