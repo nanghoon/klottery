@@ -354,7 +354,7 @@
 			<a href="#" class="w-inline-block">
 				<img src="/klottery/webflow/images/logo.png" loading="lazy"
 				srcset="/klottery/webflow/images/k-lottery로고-p-500.png 500w, /klottery/webflow/images/k-lottery로고-p-800.png 800w, /klottery/webflow/images/k-lottery로고-p-1080.png 1080w, /klottery/webflow/images/k-lottery로고-p-1600.png 1600w, /klottery/webflow/images/k-lottery로고-p-2000.png 2000w, /klottery/webflow/images/logo.png 2068w"
-				sizes="(max-width: 767px) 100vw, (max-width: 991px) 105.984375px, 11vw" alt="" class="logo">
+				sizes="100vw" alt="" class="logo">
 			</a>
 			<div class="topmenubox">
 				<a href="#" class="topmenulink w-inline-block">
@@ -371,6 +371,7 @@
 						<div class="text-block-22">메가밀리언</div>
 						<div class="text-block-23">구매 바로가기</div> 
 					</a> 
+					
 					<a href="#" class="lottobox w-inline-block">
 						<img src="/klottery/webflow/images/lotto_logo.png" loading="lazy" alt="">
 						<div class="text-block-22">동행복권</div>
