@@ -144,25 +144,28 @@
 						</div>
 					</div>
 					<div class="bannerbox4">
-						<div class="lotto_recent_date">직전회차 : WED / SEP 14</div>
+						<jsp:setProperty name="javaDate" property="time" value="${power.rdate.time + 13*60*60*1000}"/>
+						<div class="lotto_recent_date">
+							직전회차 : <fmt:setLocale value="en_us" scope="session"/><fmt:formatDate value="${javaDate}" pattern="EEE / MMM dd"/>
+						</div>
 						<div class="lottoball">
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${power.num1}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${power.num2}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${power.num3}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${power.num4}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${power.num5}</div>
 							</div>
 							<div class="bonusball">
-								<div class="bball_num">14</div>
+								<div class="bball_num">${power.bnum}</div>
 							</div>
 						</div>
 						<a href="#" class="powerbtn w-button">구매하기</a>

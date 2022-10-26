@@ -28,6 +28,7 @@ public class MainController {
 	public String main(Model model){
 		LottoApi.getMainData(model);
 		model.addAttribute("mega", sampleDAO.select("selectMostRecentLottoByType" ,1));
+		model.addAttribute("power", sampleDAO.select("selectMostRecentLottoByType" ,3));
 		return "user/main";
 	}
 }

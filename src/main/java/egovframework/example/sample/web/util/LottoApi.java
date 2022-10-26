@@ -34,7 +34,11 @@ public class LottoApi {
 	
 	@RequestMapping(value="/setResultMega.do")
 	public void setResultMegaUrl(){
-		setResultMega(sampleDAO);
+		setResultMegaPower(sampleDAO , 1);
+	}
+	@RequestMapping(value="/setResultPower.do")
+	public void setResultPowerUrl(){
+		setResultMegaPower(sampleDAO , 3);
 	}
 	
 	// 환율
@@ -146,9 +150,10 @@ public class LottoApi {
 	}
 	
 	// 최근 결과 셋팅
-	public static void setResultMega(SampleDAO sampleDAO){
+	public static void setResultMegaPower(SampleDAO sampleDAO , int type){
 		System.out.println("setResultMega===============================================================");
 		String url = "https://www.calottery.com/api/DrawGameApi/DrawGamePastDrawResults/15/1/20";
+		if(type == 3) url = "https://www.calottery.com/api/DrawGameApi/DrawGamePastDrawResults/12/1/20";
 		Document doc = null;
 		try {
 			doc = Jsoup.connect(url)
@@ -162,7 +167,7 @@ public class LottoApi {
 			JSONObject recentData = (JSONObject) jobj.get("MostRecentDraw"); // 가장 최근 데이터 
 			String cnt = ""+recentData.get("DrawNumber"); // 회차
 			EgovMap in = new EgovMap();
-			in.put("type", 1);
+			in.put("type", type);
 			in.put("cnt", cnt);
 			System.out.println("타입과 회차 찾기 : " + in);
 			EgovMap info = (EgovMap)sampleDAO.select("checkRecentLotto" , in);
