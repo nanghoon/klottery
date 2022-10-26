@@ -69,8 +69,10 @@ public class LottoApi {
 		model.addAttribute("mShow", mShow);
 		model.addAttribute("mWon", mWon);
 		model.addAttribute("pDate", pDate);
-		model.addAttribute("lWon", lWon);
 		model.addAttribute("pWon", pWon);
+		model.addAttribute("pShow", pShow);
+		model.addAttribute("lWon", lWon);
+		model.addAttribute("lShow", lShow);
 	}
 	
 	// 메인페이지 데이터 셋팅
@@ -122,6 +124,7 @@ public class LottoApi {
 		try {
 			doc = Jsoup.connect(url).get();
 			lWon = doc.select("#winnerId dl dd strong").text().replace("억원", "");
+			lShow = true;
 		} catch (Exception e) {
 			System.out.println("setMainLottoData Err : "+ e);
 		}
@@ -149,6 +152,7 @@ public class LottoApi {
 			String hitMoney = new BigDecimal(jackpot).multiply(new BigDecimal(1000000)).toPlainString();
 			String hitMoneyKr = new BigDecimal(hitMoney).multiply(new BigDecimal(rate)).toPlainString();
 			pWon = new BigDecimal(hitMoneyKr).divide(new BigDecimal(100000000) ,0 , BigDecimal.ROUND_DOWN).toPlainString();
+			pShow = true;
 		} catch (Exception e) {
 			System.out.println("setMainPowerData Err : "+ e);
 		}		
@@ -226,7 +230,7 @@ public class LottoApi {
 			doc = Jsoup.connect(url).get();
 			String cnt = doc.select(".win_result h4 strong").text().replace("회", "");
 			EgovMap in = new EgovMap();
-			in.put("type", 3);
+			in.put("type", 2);
 			in.put("cnt", cnt);
 			System.out.println("타입과 회차 찾기 : " + in);
 			EgovMap info = (EgovMap)sampleDAO.select("checkRecentLotto" , in);

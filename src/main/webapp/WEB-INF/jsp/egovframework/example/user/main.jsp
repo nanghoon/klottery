@@ -26,11 +26,6 @@
 						<div class="lottohit">메가밀리언 추첨</div>
 						<div class="lottohitdate">- ${mDate}</div>
 					</div>
-					<!-- <div class="bannerbox3-copy">
-						<div class="lotto_money">
-							<div class="lotto_money-copy">추첨대기중</div>
-						</div>
-					</div> -->
 					<div class="bannerbox3-copy">
 						<c:if test="${!mShow}">
 							<div class="lotto_money">
@@ -86,38 +81,45 @@
 						<div class="lottohitdate">- 매주 토요일 20:00</div>
 					</div>
 					<div class="bannerbox3-copy">
-						<div class="lotto_money">
-							<div class="lotto_won">₩</div>
-							<div class="lotto_money">${lWon}</div>
-							<div class="lotto_money2">
-								<div class="moenytxt1">당첨금</div>
-								<div class="moenytxt2">억원</div>
+						<c:if test="${!lShow}">
+							<div class="lotto_money">
+								<div class="lotto_money-copy">추첨대기중</div>
 							</div>
-						</div>
+						</c:if>
+						<c:if test="${lShow}">
+							<div class="lotto_money">
+								<div class="lotto_won">₩</div>
+								<div class="lotto_money"><fmt:formatNumber value="${lWon}"/></div>
+								<div class="lotto_money2">
+									<div class="moenytxt1">당첨금</div>
+									<div class="moenytxt2">억원</div>
+								</div>
+							</div>
+						</c:if>
 					</div>
 					<div class="bannerbox4">
-						<div class="lotto_recent_date">직전회차 : WED / SEP 14</div>
+						<div class="lotto_recent_date">직전회차 : <fmt:setLocale value="en_us" scope="session"/><fmt:formatDate value="${lotto.rdate}" pattern="EEE / MMM dd"/></div>
 						<div class="lottoball">
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${lotto.num1}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${lotto.num2}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${lotto.num3}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${lotto.num4}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${lotto.num5}</div>
 							</div>
 							<div class="whiteball">
-								<div class="wball_num">14</div>
+								<div class="wball_num">${lotto.num6}</div>
 							</div>
 							<div class="bonusball">
-								<div class="bball_num">14</div>
+								<div class="bball_num">${lotto.bnum}</div>
 							</div>
 						</div>
 						<a href="#" class="lottobtn w-button">구매하기</a>
@@ -134,14 +136,21 @@
 						<div class="lottohitdate">- ${pDate}</div>
 					</div>
 					<div class="bannerbox3-copy">
-						<div class="lotto_money">
-							<div class="lotto_won">₩</div>
-							<div class="lotto_money"><fmt:formatNumber value="${pWon}"/></div>
-							<div class="lotto_money2">
-								<div class="moenytxt1">당첨금</div>
-								<div class="moenytxt2">억원</div>
+						<c:if test="${!pShow}">
+							<div class="lotto_money">
+								<div class="lotto_money-copy">추첨대기중</div>
 							</div>
-						</div>
+						</c:if>
+						<c:if test="${pShow}">
+							<div class="lotto_money">
+								<div class="lotto_won">₩</div>
+								<div class="lotto_money"><fmt:formatNumber value="${pWon}"/></div>
+								<div class="lotto_money2">
+									<div class="moenytxt1">당첨금</div>
+									<div class="moenytxt2">억원</div>
+								</div>
+							</div>
+						</c:if>
 					</div>
 					<div class="bannerbox4">
 						<jsp:setProperty name="javaDate" property="time" value="${power.rdate.time + 13*60*60*1000}"/>
