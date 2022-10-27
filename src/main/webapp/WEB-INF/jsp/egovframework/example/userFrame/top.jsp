@@ -97,13 +97,13 @@
 										</div>
 									</a>
 									<div class="menuwrap">
-										<a href="#" class="menubtn _2 w-inline-block">
+										<a href="/klottery/result.do?type=1" class="menubtn _2 w-inline-block">
 											<div class="f_txt m">메가밀리언</div>
 										</a> 
-										<a href="#" class="menubtn _2 w-inline-block">
+										<a href="/klottery/result.do?type=2" class="menubtn _2 w-inline-block">
 											<div class="f_txt m">동행복권</div>
 										</a> 
-										<a href="#" class="menubtn _2 w-inline-block">
+										<a href="/klottery/result.do?type=3" class="menubtn _2 w-inline-block">
 											<div class="f_txt m">뉴욕로또</div>
 										</a>
 									</div>

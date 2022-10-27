@@ -97,9 +97,12 @@
 				</div>
 				<div class="pagingbox">
 					<div class="pagingboxwrap">
-						<ui:pagination paginationInfo="${pi}" type="user"/>
+						<ui:pagination paginationInfo="${pi}" jsFunction="page" type="user"/>
 					</div>
 				</div>
+				<form name="listForm" id="listForm">
+					<input type="hidden" name="pageIndex"/>
+				</form>
 			</div>
 		</div>
 		<jsp:include page="../userFrame/bottom.jsp"></jsp:include>
@@ -107,4 +110,10 @@
 	<jsp:include page="../userFrame/popup.jsp"></jsp:include>
 	<jsp:include page="../userFrame/footer.jsp"></jsp:include>
 </body>
+<script>
+function page(pageNo) {
+	document.listForm.pageIndex.value = pageNo;
+	document.listForm.submit();
+}
+</script>
 </html>
