@@ -298,6 +298,7 @@
 		</div>
 		<jsp:include page="../userFrame/bottom.jsp"></jsp:include>
 	</div>
+	<jsp:include page="../userFrame/popup.jsp"></jsp:include>
 	<jsp:include page="../userFrame/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -48,7 +48,7 @@ function login(){
 		url : '/klottery/loginProcess.do',
 		success:function(data){
 			alert(data.msg);
-			if(data.result == 'suc') location.href='/klottery/user/main.do';
+			if(data.result == 'suc') location.href='/klottery/main.do';
 		},error:function(e){
 			console.log(e);
 		}

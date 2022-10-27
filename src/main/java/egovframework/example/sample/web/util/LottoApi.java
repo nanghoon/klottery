@@ -3,7 +3,6 @@ package egovframework.example.sample.web.util;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.annotation.Resource;
 
@@ -148,19 +147,43 @@ public class LottoApi {
 			Date nextDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(nextDateTxt);
 			nextDate.setHours(nextDate.getHours()+9);
 			pDate = new SimpleDateFormat("MM월 dd일 E요일 HH:mm").format(nextDate);
-			String jackpot = jobj.get("field_prize_amount").toString().replace("$", "").replace(" Million", "");
-			String hitMoney = new BigDecimal(jackpot).multiply(new BigDecimal(1000000)).toPlainString();
-			String hitMoneyKr = new BigDecimal(hitMoney).multiply(new BigDecimal(rate)).toPlainString();
-			pWon = new BigDecimal(hitMoneyKr).divide(new BigDecimal(100000000) ,0 , BigDecimal.ROUND_DOWN).toPlainString();
-			pShow = true;
+			
+			// 추첨 대기중인지 
+			pShow = getPowerShow();
+			if(pShow){
+				System.out.println("pShow ---- TRUE---------------------------------------");
+				String jackpot = jobj.get("field_prize_amount").toString().replace("$", "").replace(" Million", "");
+				String hitMoney = new BigDecimal(jackpot).multiply(new BigDecimal(1000000)).toPlainString();
+				String hitMoneyKr = new BigDecimal(hitMoney).multiply(new BigDecimal(rate)).toPlainString();
+				pWon = new BigDecimal(hitMoneyKr).divide(new BigDecimal(100000000) ,0 , BigDecimal.ROUND_DOWN).toPlainString();
+				if(Utils.getDayOfWeek().equals("화") || Utils.getDayOfWeek().equals("목") || Utils.getDayOfWeek().equals("일")){
+					System.out.println("화요일 , 목요일 , 일요일-------------------------------------");
+					Scheduler.setPower = true;
+				}
+			}
+			
 		} catch (Exception e) {
 			System.out.println("setMainPowerData Err : "+ e);
 		}		
 	}
 	
+	private static boolean getPowerShow() {
+		System.out.println("getPowerShow===============================================================");
+		String url = "https://www.calottery.com/draw-games/powerball#section-content-1-3";
+		Document doc = null;
+		try {
+			doc = Jsoup.connect(url).get();
+			int result = doc.select(".row.component.column-splitter .offset-lg-1 .draw-game-top-winning-tickets").size();
+			if(result == 0) 
+				return false;
+		} catch (Exception e) {
+			System.out.println("getPowerShow Err : "+ e);
+		}
+		return true;
+	}
 	// 최근 결과 셋팅
 	public static void setResultMegaPower(SampleDAO sampleDAO , int type){
-		System.out.println("setResultMega===============================================================");
+		System.out.println("setResultMegaPower===============================================================");
 		String url = "https://www.calottery.com/api/DrawGameApi/DrawGamePastDrawResults/15/1/20";
 		if(type == 3) url = "https://www.calottery.com/api/DrawGameApi/DrawGamePastDrawResults/12/1/20";
 		Document doc = null;
@@ -219,7 +242,7 @@ public class LottoApi {
 				
 			}
 		} catch (Exception e) {
-			System.out.println("setResultMega Err : "+ e);
+			System.out.println("setResultMegaPower Err : "+ e);
 		}
 	}
 	public static void setResultLotto(SampleDAO sampleDAO){

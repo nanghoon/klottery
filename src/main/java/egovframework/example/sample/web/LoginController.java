@@ -279,7 +279,7 @@ public class LoginController {
 		session.setAttribute("userName", null);
 		session.setAttribute("userId", null);
 		session.setAttribute("userPoint", null);
-		return"redirect:/user/main.do";
+		return"redirect:/main.do";
 	}
 	
 }

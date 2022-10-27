@@ -6,6 +6,29 @@
 	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
 	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
 
+	<select id="selectLottoListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM lotto_result
+            where type = #type#
+        ]]>
+	</select>
+	<select id="selectLottoList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM lotto_result
+            where type = #type#
+            order by idx desc
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectLottoDetail" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM lotto_result
+            where idx = #idx#
+        ]]>
+	</select>
 	<select id="checkRecentLotto" resultClass="EgovMap">
         <![CDATA[
             SELECT *
