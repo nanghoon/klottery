@@ -2234,6 +2234,10 @@
   font-family: 'Noto Sans KR', sans-serif;
 }
 
+.popframe.msg {
+  display: none;
+}
+
 .popframe.myball {
   display: none;
 }
@@ -5852,6 +5856,12 @@
     display: none;
   }
 
+  .popup.balldetail {
+    max-height: 700px;
+    min-height: 400px;
+    padding-top: 50px;
+  }
+
   .selectgamehit {
     width: auto;
   }
@@ -7040,6 +7050,11 @@
     display: flex;
     width: 25%;
   }
+
+  .div-block-46 {
+    overflow: auto;
+    max-height: 500px;
+  }
 }
 
 @media screen and (max-width: 479px) {
@@ -7223,8 +7238,35 @@
     margin-top: 20px;
   }
 
+  .wball_pick._1 {
+    width: 40px;
+    height: 40px;
+  }
+
+  .bball_pick._1 {
+    width: 40px;
+    height: 40px;
+  }
+
+  .popframe.msg {
+    display: none;
+  }
+
   .popframe.balldetail {
     display: none;
+  }
+
+  .popup {
+    width: 80%;
+    height: 200px;
+  }
+
+  .pop_msg {
+    font-size: 20px;
+  }
+
+  .myball_list {
+    width: 170%;
   }
 
   .hit_wball {
@@ -7247,6 +7289,18 @@
 
   .hit_list {
     width: 280%;
+  }
+
+  .div-block-10 {
+    padding-left: 0px;
+  }
+
+  .div-block-12 {
+    width: 180%;
+  }
+
+  .div-block-12-copy {
+    width: 180%;
   }
 
   .empty {
@@ -7605,6 +7659,10 @@
   }
 
   .div-block-45 {
+    width: 100%;
+  }
+
+  .div-block-46 {
     width: 100%;
   }
 }
