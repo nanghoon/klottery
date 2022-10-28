@@ -20,7 +20,7 @@
 				<div class="form-block w-form">
 					<form id="loginForm" method="post" class="form">
 						<input type="text" class="text-field-5 w-input" maxlength="20" name="id" placeholder="아이디 입력" value="${cookieId }">
-						<input type="password" class="text-field-5 w-input" maxlength="20" name="pw" placeholder="비밀번호 입력">
+						<input  onkeyup="enterkey();" type="password" class="text-field-5 w-input" maxlength="20" name="pw" placeholder="비밀번호 입력">
 						<label class="w-checkbox">
 							<input type="checkbox" name="saveId" id="saveId" class="w-checkbox-input" ${cookieId != null ? 'checked' : '' }>
 							<span class="checkbox-label w-form-label" for="saveId">아이디 저장</span>
@@ -53,6 +53,11 @@ function login(){
 			console.log(e);
 		}
 	})
+}
+function enterkey() {
+	if (window.event.keyCode == 13) {
+		login();
+	}
 }
 </script>
 </html>

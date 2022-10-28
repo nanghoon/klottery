@@ -44,12 +44,10 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
     			response.sendRedirect("/klottery/admin/login.do");
     			return false;
 			}
-		}    
-		
-    	//유저 인터셉터
-		if(urlArr[2].equals("user")){ // 유저의 경우
+		}else{
+			session.setAttribute("curPage", urlArr[2]);
 		}
-
+		
 		return true;
     }
     // 컨트롤러가 수행되고 화면이 보여지기 직전에 수행되는 메서드

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+	<!-- QnA 답변 작성 -->
+	<update id="updateAnswer">
+		<![CDATA[
+			UPDATE qna
+			SET answer=#answer#
+				, adate = now()
+				, answerYn = 'Y'
+			WHERE idx=#idx#
+		]]>
+	</update>
+
+	<!-- 자주묻는 질문  -->
+	<select id="selectFaqList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM faq 
+            where 1=1
+        ]]>
+		<isNotEmpty property="search">
+       		and title like concat('%' , #search# , '%')
+       	</isNotEmpty>         
+        <![CDATA[
+            order by idx desc
+            LIMIT #first# ,#record#
+        ]]>
+	</select>	
+	<select id="selectFaqListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM faq
+            where 1=1
+        ]]>
+		<isNotEmpty property="search">
+       		and title like concat('%' , #search# , '%')
+       	</isNotEmpty>         
+	</select>	
+	<insert id="insertFaq">
+		<![CDATA[
+			INSERT INTO faq
+				( title
+				  , text
+				  , fdate)
+			VALUES ( #title#
+				  , #text#
+				  , now())
+		]]>
+	</insert>
+	<select id="selectFaqDetail" resultClass="EgovMap">
+        <![CDATA[
+            SELECT * 
+            FROM faq
+            where idx = #idx#
+        ]]>
+	</select>
+	<update id="updateFaq">
+		<![CDATA[
+			UPDATE faq
+			SET title=#title#
+				, text=#text#
+			WHERE idx=#idx#
+		]]>
+	</update>
+	
+	<delete id="deleteFaq">
+		<![CDATA[
+			DELETE FROM faq
+			WHERE idx=#idx#
+		]]>
+	</delete>
+	
+	<!-- QNA - 1:1 상담  -->
+	<select id="selectQnaListAll" resultClass="EgovMap">
+        <![CDATA[
+            SELECT * , (select id from member where member.idx = qidx) writer
+            FROM qna
+            order by qdate desc 
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectQnaListCntAll" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM qna
+        ]]>
+	</select>
+	<select id="selectQnaList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM qna
+            where qidx = #idx#
+            order by qdate desc 
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectQnaListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM qna
+            where qidx = #idx#
+        ]]>
+	</select>
+	<insert id="insertQna">
+		<![CDATA[
+			INSERT INTO qna
+				( category
+				  , title
+				  , text
+				  , qidx
+				  , qdate
+				  , answerYn)
+			VALUES ( #category#
+				  , #title#
+				  , #text#
+				  , #qidx#
+				  , now()
+				  , 'N')
+		]]>
+		<selectKey keyProperty="idx" resultClass="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>		
+	</insert>
+	<select id="selectQnaDetail" resultClass="EgovMap">
+        <![CDATA[
+            SELECT * , m.id writer , m.idx midx
+            FROM qna
+            left join member m on m.idx = qna.qidx
+            where qna.idx = #idx#
+        ]]>
+	</select>
+	<delete id="deleteQna">
+		<![CDATA[
+			DELETE FROM qna
+			WHERE idx=#idx#
+		]]>
+	</delete>
+	
+	<select id="selectEventList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM event
+            order by idx desc
+            limit #first# , #record#
+            
+        ]]>
+	</select>
+	<select id="selectEventListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM event
+            order by idx desc
+        ]]>
+	</select>
+	<select id="selectEventDetail" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM event
+            where idx = #idx#
+        ]]>
+	</select>
+	
+	<delete id="deleteEvent">
+		<![CDATA[
+			DELETE FROM event
+			WHERE idx=#idx#
+		]]>
+	</delete>
+	
+	<insert id="insertEvent">
+		<![CDATA[
+			INSERT INTO event
+				( title
+				  , text
+				  , img
+				  , sdate
+				  , edate
+				  , wdate)
+			VALUES ( #title#
+				  , #text#
+				  , #img#
+				  , #sdate#
+				  , #edate#
+				  , now())
+		]]>
+	</insert>
+	
+	<update id="updateEvent">
+		<![CDATA[
+			UPDATE event
+			SET title=#title#
+				, text=#text#
+		]]>
+			<isNotEmpty property="img">
+				, img=#img#
+			</isNotEmpty>
+		<![CDATA[
+				, sdate=#sdate#
+				, edate=#edate#
+			WHERE idx=#idx#
+		]]>
+	</update>
+</sqlMap>

@@ -5,7 +5,38 @@
 
 	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
 	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
-
+	<sql id = "userSearch">
+        <isNotEmpty property="search">
+       		and (id like concat('%' , #search# , '%') or name like concat('%' , #search# , '%')) 
+       	</isNotEmpty>
+	</sql>
+	<select id="selectUserList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM member
+            where 1=1 
+        ]]>
+        <include refid="userSearch"/>
+       	<isNotEqual property="limit" compareValue="n">
+       		limit #first# , #record# 
+       	</isNotEqual>
+	</select>
+	
+	<select id="selectUserListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM member
+            where 1=1 
+        ]]>
+		<include refid="userSearch"/>
+	</select>
+	<select id="selectUserDetail" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM member
+            where idx =#idx#
+        ]]>
+	</select>
 	<select id="checkDupleId" resultClass="EgovMap">
         <![CDATA[
             SELECT *
@@ -59,6 +90,14 @@
         <![CDATA[
             SELECT *
             FROM member
+            where id = #id# and pw = #pw#
+            limit 1
+        ]]>
+	</select>
+	<select id="checkAdminLogin" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM admin
             where id = #id# and pw = #pw#
             limit 1
         ]]>

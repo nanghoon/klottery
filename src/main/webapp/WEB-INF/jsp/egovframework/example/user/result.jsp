@@ -102,6 +102,7 @@
 				</div>
 				<form name="listForm" id="listForm">
 					<input type="hidden" name="pageIndex"/>
+					<input type="hidden" name="type" value="${type}"/>
 				</form>
 			</div>
 		</div>

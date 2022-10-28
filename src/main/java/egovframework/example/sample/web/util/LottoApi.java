@@ -1,6 +1,8 @@
 package egovframework.example.sample.web.util;
 
 import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -34,7 +36,8 @@ public class LottoApi {
 	
 	@RequestMapping(value="/setResultMega.do")
 	public void setResultMegaUrl(){
-		setResultMegaPower(sampleDAO , 1);
+		//setResultMegaPower(sampleDAO , 1);
+		getMegaPowerVideo(1);
 	}
 	@RequestMapping(value="/setResultPower.do")
 	public void setResultPowerUrl(){
@@ -224,7 +227,7 @@ public class LottoApi {
 				hitDate.setHours(hitDate.getHours()+13);
 				in.put("rdate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(hitDate));
 				// 추첨 영상
-				//in.put("vurl", getMegaVideo());
+				in.put("vurl", getMegaPowerVideo(type));
 				// 결과 0 이월 1 당첨
 				in.put("result", first.get("Count").toString().equals("0") ? 0 : 1);
 				// 1-9등 랭크 
@@ -236,7 +239,7 @@ public class LottoApi {
 				}
 				in.put("data", data);
 				System.out.println(in);
-				sampleDAO.insert("insertLottoResult",in);
+				//sampleDAO.insert("insertLottoResult",in);
 				if(type == 1)Scheduler.setMega = false;
 				else Scheduler.setPower = false;
 				
@@ -294,14 +297,15 @@ public class LottoApi {
 	}
 	
 	
-	private static String getMegaVideo(){
-		System.out.println("getMegaVideo===============================================================");
-		String url = "https://www.youtube.com/user/megamillions46/videos";
-		Document doc = null;
+	private static String getMegaPowerVideo(int type){
+		System.out.println("getMegaPowerVideo Type : "+type+"===============================================================");
 		try {
-			doc = Jsoup.connect(url).get();
-			System.out.println(doc);
-			System.out.println(doc.select("contents"));
+			String apikey = "AIzaSyBEpIUG96OIjsCIL9AXwspWfhJEbcgFELM";
+			String apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?key="+ apikey
+			+ "&part=snippet&fields=nextPageToken,pageInfo,items(id,snippet(publishedAt,title,description,thumbnails(high(url)),resourceId(videoId)))&order=date&maxResults=50";
+		    HttpURLConnection conn = (HttpURLConnection) new URL(apiUrl).openConnection();
+		    System.out.println(conn);
+			
 		} catch (Exception e) {
 			System.out.println("getMegaVideo Err : "+ e);
 		}

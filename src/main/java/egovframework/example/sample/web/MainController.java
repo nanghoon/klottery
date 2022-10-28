@@ -74,4 +74,10 @@ public class MainController {
 		obj.put("info", info);
 		return obj.toJSONString();
 	}
+	
+	// 복권소개
+	@RequestMapping(value="/intro.do")
+	public String intro(){
+		return "user/intro";
+	}
 }

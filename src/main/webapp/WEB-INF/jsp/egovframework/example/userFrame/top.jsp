@@ -2,7 +2,6 @@
 <%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <div class="top">
 	<div class="topbar">
 		<div class="topwrap_login">
@@ -84,7 +83,7 @@
 							</div>
 							<div class="menubox mypage">
 								<div class="m_container">
-									<a href="#" class="menubtn w-inline-block">
+									<a href="/klottery/intro.do" class="menubtn w-inline-block">
 										<div class="f_txt m">
 											<span class="text-span-37">〉</span>복권소개
 										</div>
@@ -124,7 +123,7 @@
 										</div>
 									</a>
 									<div class="menuwrap">
-										<a href="#" class="menubtn _2 w-inline-block">
+										<a href="/klottery/faqList.do" class="menubtn _2 w-inline-block">
 											<div class="f_txt m">자주묻는질문</div>
 										</a> 
 										<a href="#" class="menubtn _2 w-inline-block">
@@ -207,7 +206,7 @@
 				sizes="100vw" alt="" class="logo">
 			</a>
 			<div class="topmenubox">
-				<a href="#" class="topmenulink w-inline-block">
+				<a href="/klottery/intro.do" class="topmenulink w-inline-block <c:if test = "${fn:contains(curPage, 'intro.do')}">click</c:if>">
 					<div class="topmenu">복권소개</div>
 				</a> 
 				<a href="#" class="topmenulink w-inline-block _menuBuyGame">
@@ -235,10 +234,10 @@
 						<div class="text-block-23">구매 바로가기</div> 
 					</a>
 				</div>
-				<a href="/klottery/result.do?type=1" class="topmenulink w-inline-block">
+				<a href="/klottery/result.do?type=1" class="topmenulink w-inline-block  <c:if test = "${fn:contains(curPage, 'result.do')}">click</c:if>">
 					<div class="topmenu">당첨결과</div>
 				</a> 
-				<a href="#" class="topmenulink w-inline-block">
+				<a href="/klottery/faqList.do" class="topmenulink w-inline-block">
 					<div class="topmenu">고객센터</div>
 				</a> 
 				<a href="#" class="topmenulink w-inline-block">
