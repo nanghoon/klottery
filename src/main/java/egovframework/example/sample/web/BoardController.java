@@ -152,7 +152,7 @@ public class BoardController {
 			eventList.get(i).put("text", StringEscapeUtils.unescapeHtml3(eventList.get(i).get("text").toString()));
 		}
 		pi.setTotalRecordCount((int)sampleDAO.select("selectEventListCnt" , in));
-		model.addAttribute("eventList",eventList);
+		model.addAttribute("list",eventList);
 		model.addAttribute("pi",pi);
 		return"user/eventList";
 	}

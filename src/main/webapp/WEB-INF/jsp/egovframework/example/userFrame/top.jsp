@@ -110,7 +110,7 @@
 							</div>
 							<div class="menubox customer">
 								<div class="m_container">
-									<a href="#" class="menubtn w-inline-block">
+									<a href="/klottery/eventList.do" class="menubtn w-inline-block">
 										<div class="f_txt m">
 											<span class="text-span-37">〉</span>이벤트
 										</div>
@@ -126,7 +126,7 @@
 										<a href="/klottery/faqList.do" class="menubtn _2 w-inline-block">
 											<div class="f_txt m">자주묻는질문</div>
 										</a> 
-										<a href="#" class="menubtn _2 w-inline-block">
+										<a href="/klottery/user/qnaList.do" class="menubtn _2 w-inline-block">
 											<div class="f_txt m">1:1상담</div>
 										</a> 
 										<a href="#" class="menubtn _2 w-inline-block">
@@ -234,13 +234,13 @@
 						<div class="text-block-23">구매 바로가기</div> 
 					</a>
 				</div>
-				<a href="/klottery/result.do?type=1" class="topmenulink w-inline-block  <c:if test = "${fn:contains(curPage, 'result.do')}">click</c:if>">
+				<a href="/klottery/result.do?type=1" class="topmenulink w-inline-block <c:if test = "${fn:contains(curPage, 'result.do')}">click</c:if>">
 					<div class="topmenu">당첨결과</div>
 				</a> 
 				<a href="/klottery/faqList.do" class="topmenulink w-inline-block <c:if test = "${fn:contains(curPage, 'faqList.do')||fn:contains(curPage, 'qna')||fn:contains(curPage, 'buyGuide.do')||fn:contains(curPage, 'hitGuide.do')}">click</c:if>">
 					<div class="topmenu">고객센터</div>
 				</a> 
-				<a href="#" class="topmenulink w-inline-block">
+				<a href="/klottery/eventList.do" class="topmenulink w-inline-block <c:if test = "${fn:contains(curPage, 'event')}">click</c:if>">
 					<div class="topmenu">이벤트</div>
 				</a>
 			</div>
