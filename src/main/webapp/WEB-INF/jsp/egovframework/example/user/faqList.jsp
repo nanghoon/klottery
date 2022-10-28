@@ -22,7 +22,7 @@
 		<div class="selectgame">
 			<div class="selectcontactwrap">
 				<a href="javascript:void(0)" class="link l">자주묻는질문</a> 
-				<a href="/klottery/qnaList.do" class="link">1:1 상담</a> 
+				<a href="/klottery/user/qnaList.do" class="link">1:1 상담</a> 
 				<a href="/klottery/buyGuide.do" class="link">구매가이드</a> 
 				<a href="/klottery/hitGuide.do" class="link">당첨가이드</a>
 			</div>
@@ -30,7 +30,7 @@
 		<div class="hit_content">
 			<div class="hit_content_wrap">
 				<div class="w-form">
-					<form id="listForm" name="listForm" method="get">
+					<form id="listForm" name="listForm" method="get" action="/klottery/faqList.do">
 						<input type="hidden" name="pageIndex"/>
 						<div class="div-block-16">
 							<input type="text" class="text-field-2 w-input" onkeypress="if(event.keyCode==13) {javascript:checkForm(); return false;}" maxlength="50" name="search" placeholder="제목" value="${search}"> 

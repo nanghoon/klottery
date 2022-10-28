@@ -36,7 +36,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
     			return true; // 바로 그 url로 이동 
     		}
     	}
-    	
+    	session.setAttribute("curPage", null);
 		// 관리자 인터셉터 
 		if(urlArr[2].equals("admin")){// 관리자의 경우
 			// 로그인 안되어있으면 로그인 페이지로 
@@ -44,6 +44,12 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
     			response.sendRedirect("/klottery/admin/login.do");
     			return false;
 			}
+		}else if(urlArr[2].equals("user")){
+			if(session.getAttribute("userIdx") == null){ 
+    			response.sendRedirect("/klottery/login.do");
+    			return false;
+			}
+			session.setAttribute("curPage", urlArr[3]);
 		}else{
 			session.setAttribute("curPage", urlArr[2]);
 		}

@@ -47,8 +47,8 @@ function login(){
 		data : formdata,
 		url : '/klottery/loginProcess.do',
 		success:function(data){
-			alert(data.msg);
 			if(data.result == 'suc') location.href='/klottery/main.do';
+			else alert(data.msg); 
 		},error:function(e){
 			console.log(e);
 		}

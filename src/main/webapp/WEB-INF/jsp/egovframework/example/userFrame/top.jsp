@@ -237,7 +237,7 @@
 				<a href="/klottery/result.do?type=1" class="topmenulink w-inline-block  <c:if test = "${fn:contains(curPage, 'result.do')}">click</c:if>">
 					<div class="topmenu">당첨결과</div>
 				</a> 
-				<a href="/klottery/faqList.do" class="topmenulink w-inline-block">
+				<a href="/klottery/faqList.do" class="topmenulink w-inline-block <c:if test = "${fn:contains(curPage, 'faqList.do')||fn:contains(curPage, 'qna')||fn:contains(curPage, 'buyGuide.do')||fn:contains(curPage, 'hitGuide.do')}">click</c:if>">
 					<div class="topmenu">고객센터</div>
 				</a> 
 				<a href="#" class="topmenulink w-inline-block">

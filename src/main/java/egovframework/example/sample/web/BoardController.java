@@ -53,7 +53,7 @@ public class BoardController {
 		return "user/faqList";
 	}
 	
-	@RequestMapping("/qnaInsert.do")
+	@RequestMapping("/user/qnaInsert.do")
 	public String qnaInsert(HttpServletRequest request,Model model){
 		HttpSession session = request.getSession();
 		String idx = session.getAttribute("userIdx").toString();
@@ -62,7 +62,7 @@ public class BoardController {
 		return"user/qnaInsert";
 	}
 	@ResponseBody
-	@RequestMapping(value="/qnaInsertProcess.do" , produces="application/json; charset=utf8")
+	@RequestMapping(value="/user/qnaInsertProcess.do" , produces="application/json; charset=utf8")
 	public String qnaInsertProcess(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		String title =request.getParameter("title");
@@ -92,7 +92,7 @@ public class BoardController {
 		obj.put("msg", "문의등록이 완료되었습니다.");
 		return obj.toJSONString();
 	}
-	@RequestMapping(value="/qnaList.do")
+	@RequestMapping(value="/user/qnaList.do")
 	public String qnaList(HttpServletRequest request, Model model){
 		HttpSession session = request.getSession();
 		PaginationInfo pi = new PaginationInfo();
@@ -113,11 +113,11 @@ public class BoardController {
 			qnaList.get(i).put("text", StringEscapeUtils.unescapeHtml3(qnaList.get(i).get("text").toString()));
 		}
 		pi.setTotalRecordCount((int)sampleDAO.select("selectQnaUserListCnt" , in));
-		model.addAttribute("qnaList",qnaList);
+		model.addAttribute("list",qnaList);
 		model.addAttribute("pi",pi);
 		return"user/qnaList";
 	}
-	@RequestMapping(value="/qnaDetail.do")
+	@RequestMapping(value="/user/qnaDetail.do")
 	public String qnaDetail(HttpServletRequest request, Model model){
 		String idx = request.getParameter("idx");
 		EgovMap in = new EgovMap();

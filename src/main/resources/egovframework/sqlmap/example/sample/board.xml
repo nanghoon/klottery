@@ -140,7 +140,25 @@
 			WHERE idx=#idx#
 		]]>
 	</delete>
-	
+	<select id="selectQnaUserList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM qna
+            where qidx = #idx#
+            order by qdate desc
+            limit #first# , #record#
+            
+        ]]>
+	</select>
+	<select id="selectQnaUserListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM qna
+            where qidx = #idx#
+        ]]>
+	</select>
+
+	<!-- 이벤트 -->	
 	<select id="selectEventList" resultClass="EgovMap">
         <![CDATA[
             SELECT *
