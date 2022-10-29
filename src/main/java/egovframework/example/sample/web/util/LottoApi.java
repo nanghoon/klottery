@@ -32,7 +32,8 @@ public class LottoApi {
 	public static double rate;
 	public static String mDate = "",pDate = ""; // 다음 추첨 날짜
 	public static boolean mShow = true, lShow = true , pShow = true; // 당첨금 보여주기 여부 (true면 당첨금 / false면 추첨대기중)
-	public static String mWon= "", lWon = "" , pWon = ""; // 현재 당첨금
+	public static String mWon= "", lWon = "" , pWon = ""; // 현재 당첨금 (한국돈 억원 표현)
+	public static String mMoney= "", pMoney = ""; // 당첨금
 	
 	@RequestMapping(value="/setResultMega.do")
 	public void setResultMegaUrl(){
@@ -70,8 +71,10 @@ public class LottoApi {
 		model.addAttribute("mDate", mDate);
 		model.addAttribute("mShow", mShow);
 		model.addAttribute("mWon", mWon);
+		model.addAttribute("mMoney", mMoney);
 		model.addAttribute("pDate", pDate);
 		model.addAttribute("pWon", pWon);
+		model.addAttribute("pMoney", pMoney);
 		model.addAttribute("pShow", pShow);
 		model.addAttribute("lWon", lWon);
 		model.addAttribute("lShow", lShow);
@@ -106,6 +109,7 @@ public class LottoApi {
 				System.out.println("mshow ---- TRUE---------------------------------------");
 				// 당첨금
 				String hitMoney = new BigDecimal(""+jackpot.get("NextPrizePool")).toPlainString();
+				mMoney = hitMoney;
 				String hitMoneyKr = new BigDecimal(hitMoney).multiply(new BigDecimal(rate)).toPlainString();
 				mWon = new BigDecimal(hitMoneyKr).divide(new BigDecimal(100000000) ,0 , BigDecimal.ROUND_DOWN).toPlainString();
 				if(Utils.getDayOfWeek().equals("수") || Utils.getDayOfWeek().equals("토")){
@@ -126,7 +130,15 @@ public class LottoApi {
 		try {
 			doc = Jsoup.connect(url).get();
 			lWon = doc.select("#winnerId dl dd strong").text().replace("억원", "");
-			lShow = true;
+			if(lWon.equals("")){
+				lShow = false;
+			}else{
+				lShow = true;
+				if(Utils.getDayOfWeek().equals("토")){
+					System.out.println(" 토요일 -------------------------------------");
+					Scheduler.setLotto = true;
+				}
+			}
 		} catch (Exception e) {
 			System.out.println("setMainLottoData Err : "+ e);
 		}
@@ -157,6 +169,7 @@ public class LottoApi {
 				System.out.println("pShow ---- TRUE---------------------------------------");
 				String jackpot = jobj.get("field_prize_amount").toString().replace("$", "").replace(" Million", "");
 				String hitMoney = new BigDecimal(jackpot).multiply(new BigDecimal(1000000)).toPlainString();
+				pMoney = hitMoney;
 				String hitMoneyKr = new BigDecimal(hitMoney).multiply(new BigDecimal(rate)).toPlainString();
 				pWon = new BigDecimal(hitMoneyKr).divide(new BigDecimal(100000000) ,0 , BigDecimal.ROUND_DOWN).toPlainString();
 				if(Utils.getDayOfWeek().equals("화") || Utils.getDayOfWeek().equals("목") || Utils.getDayOfWeek().equals("일")){
@@ -227,7 +240,7 @@ public class LottoApi {
 				hitDate.setHours(hitDate.getHours()+13);
 				in.put("rdate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(hitDate));
 				// 추첨 영상
-				in.put("vurl", getMegaPowerVideo(type));
+				//in.put("vurl", getMegaPowerVideo(type));
 				// 결과 0 이월 1 당첨
 				in.put("result", first.get("Count").toString().equals("0") ? 0 : 1);
 				// 1-9등 랭크 
@@ -239,7 +252,7 @@ public class LottoApi {
 				}
 				in.put("data", data);
 				System.out.println(in);
-				//sampleDAO.insert("insertLottoResult",in);
+				sampleDAO.insert("insertLottoResult",in);
 				if(type == 1)Scheduler.setMega = false;
 				else Scheduler.setPower = false;
 				

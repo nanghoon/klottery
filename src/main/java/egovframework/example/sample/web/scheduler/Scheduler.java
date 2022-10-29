@@ -21,6 +21,7 @@ public class Scheduler {
     public void checkLottoResultSet(){
     	if(setMega) LottoApi.setResultMegaPower(sampleDAO , 1);
     	if(setPower) LottoApi.setResultMegaPower(sampleDAO, 3);
+    	if(setLotto) LottoApi.setResultLotto(sampleDAO);
     }
     
     // 30분 마다 main 데이터 셋팅 + 시세 가져오기 
