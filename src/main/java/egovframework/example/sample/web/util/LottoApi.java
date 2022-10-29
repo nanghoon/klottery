@@ -125,17 +125,18 @@ public class LottoApi {
 	
 	public static void setMainLottoData(){
 		System.out.println("setMainLottoData===============================================================");
-		String url = "https://dhlottery.co.kr/common.do?method=main";
+		String url = "https://dhlottery.co.kr/common.do?method=main&mainMode=default";
 		Document doc = null;
 		try {
 			doc = Jsoup.connect(url).get();
-			lWon = doc.select("#winnerId dl dd strong").text().replace("억원", "");
-			if(lWon.equals("")){
+			String txt = doc.select("#winnerId dl dd strong").text();
+			if(!txt.contains("억원")){
 				lShow = false;
 			}else{
 				lShow = true;
-				if(Utils.getDayOfWeek().equals("토")){
-					System.out.println(" 토요일 -------------------------------------");
+				lWon = doc.select("#winnerId dl dd strong").text().replace("억원", "");
+				if(Utils.getDayOfWeek().equals("토")||Utils.getDayOfWeek().equals("일")){
+					System.out.println("토요일 혹은 일요일 -------------------------------------");
 					Scheduler.setLotto = true;
 				}
 			}
@@ -280,7 +281,7 @@ public class LottoApi {
 				for(int i=0; i<balllist.size(); i++){
 					in.put("num"+(i+1), balllist.get(i).text());
 				}
-				in.put("bnum", doc.select(".nums .bonus .ball1").text());
+				in.put("bnum", doc.select(".nums .bonus span").text());
 				Elements resultList = doc.select("tbody tr");
 				// 1등 금액 
 				in.put("hit", resultList.get(0).select(".color_key1").text().replaceAll(",", "").replaceAll("원", ""));
