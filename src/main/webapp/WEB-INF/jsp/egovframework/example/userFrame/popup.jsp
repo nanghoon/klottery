@@ -24,6 +24,27 @@
 		</div>
 	</div>
 </div>
+<div class="popframe msg _popMsg">
+	<div class="popup">
+		<div class="pop_msg">
+			현재 저장된 나의 로또볼이<br>없습니다
+		</div>
+		<a href="javascript:$('._popMsg').css('display','none')" class="link-block-4 w-inline-block"><img
+			src="/klottery/webflow/images/x.png" loading="lazy" width="42" alt=""></a>
+	</div>
+</div>
+<div class="popframe myball _popMyBall">
+	<div class="popup _1">
+		<a href="javascript:$('._popMyBall').css('display','none')" class="link-block-4 w-inline-block">
+		<img src="/klottery/webflow/images/x.png" loading="lazy" width="49" alt=""></a>
+		<div class="myballbox">
+			<div class="text-block-24">나의 로또볼</div>
+			<div class="myball_list_box">
+			</div>
+		</div>
+	</div>
+</div>
+
 <script>
 function lottoDetailPop(idx){
 	$.ajax({

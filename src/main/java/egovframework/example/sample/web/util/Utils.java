@@ -160,4 +160,14 @@ public class Utils {
 
 		return sb.toString();
 	}
+
+	public static void insertPointLog(SampleDAO sampleDAO, int midx, int kind, int point, String bank , String account) {
+		EgovMap in = new EgovMap();
+		in.put("midx", midx);
+		in.put("kind", kind); //  0 입금 , 1 출금 , 2 로또구매 , 3 당첨금
+		in.put("point", point);
+		if(!Utils.isNull(bank)) in.put("bank", bank);
+		if(!Utils.isNull(account)) in.put("account", account);
+		sampleDAO.insert("insertPointLog");
+	}
 }

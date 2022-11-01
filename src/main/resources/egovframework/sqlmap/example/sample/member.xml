@@ -102,5 +102,12 @@
             limit 1
         ]]>
 	</select>
+	<update id="updateUserPoint">
+		<![CDATA[
+			UPDATE member
+			SET point = point+#point#
+			WHERE idx=#idx#
+		]]>
+	</update>
 </sqlMap>
 

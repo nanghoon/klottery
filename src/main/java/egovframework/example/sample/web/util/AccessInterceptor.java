@@ -49,6 +49,10 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
     			response.sendRedirect("/klottery/login.do");
     			return false;
 			}
+			EgovMap info = (EgovMap)sampleDAO.select("selectUserDetail",session.getAttribute("userIdx"));
+			session.setAttribute("userName", info.get("name"));
+			session.setAttribute("userId", info.get("id"));
+			session.setAttribute("userPoint", info.get("point"));
 			session.setAttribute("curPage", urlArr[3]);
 		}else{
 			session.setAttribute("curPage", urlArr[2]);

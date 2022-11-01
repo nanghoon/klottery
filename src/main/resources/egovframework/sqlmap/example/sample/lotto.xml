@@ -85,5 +85,56 @@
 				  , #vurl# )
 		]]>
 	</insert>
+	<insert id="insertMyLotto">
+		<![CDATA[
+			INSERT INTO mylotto
+				( type
+				  , midx
+				  , num1
+				  , num2
+				  , num3
+				  , num4
+				  , num5
+		]]>
+		<isNotEmpty property="num6">, num6</isNotEmpty>
+		<isNotEmpty property="bnum">, bnum</isNotEmpty>
+		<![CDATA[
+				  , mdate)
+			VALUES ( #type#
+				  , #midx#
+				  , #num1#
+				  , #num2#
+				  , #num3#
+				  , #num4#
+				  , #num5#
+		]]>
+		<isNotEmpty property="num6">, #num6#</isNotEmpty>
+		<isNotEmpty property="bnum">, #bnum#</isNotEmpty>
+		<![CDATA[
+				  , now())
+		]]>
+	</insert>	
+	<select id="selectMyLottoBallList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT idx , type , midx , num1,num2,num3,num4,num5,num6,bnum
+            FROM mylotto
+            where type = #type# and midx = #midx#
+            order by idx desc
+        ]]>
+	</select>
+	<select id="selectMyLottoBallDetail" resultClass="EgovMap">
+        <![CDATA[
+            SELECT idx , type , midx , num1,num2,num3,num4,num5,num6,bnum
+            FROM mylotto
+            where idx = #idx#
+        ]]>
+	</select>
+	
+	<delete id="deleteMyLottoBall">
+		<![CDATA[
+			DELETE FROM mylotto
+			WHERE idx=#idx#
+		]]>
+	</delete>
 </sqlMap>
 

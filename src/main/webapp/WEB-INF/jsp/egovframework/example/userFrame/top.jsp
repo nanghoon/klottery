@@ -58,7 +58,7 @@
 									</div>
 									<div class="m_ordertxt prize _2">추첨 대기중</div>
 									<img src="/klottery/webflow/images/logo_mgm_left.png" loading="lazy" alt="" class="mlogo"> 
-									<a href="#" class="m_orderbutton w-button">메가밀리언 주문하기</a>
+									<a href="/klottery/user/buyMega.do" class="m_orderbutton w-button">메가밀리언 주문하기</a>
 								</div>
 								<div class="m_ordermenubox">
 									<div class="m_ordertxt">[ 02월 12일 토요일 13:00 추첨 *한국 표준시 ]</div>
@@ -67,7 +67,7 @@
 									</div>
 									<div class="m_ordertxt prize _2">504억원</div>
 									<img src="/klottery/webflow/images/lotto_logo.png" loading="lazy" alt="" class="mlogo"> 
-									<a href="#" class="m_orderbutton w-button">로또 주문하기</a>
+									<a href="/klottery/user/buyLotto.do" class="m_orderbutton w-button">로또 주문하기</a>
 								</div>
 								<div class="m_ordermenubox">
 									<div class="m_ordertxt">[ 02월 12일 토요일 13:00 추첨 *한국 표준시 ]</div>
@@ -78,7 +78,7 @@
 										<span class="text-span-48">이월</span>504억원
 									</div>
 									<img src="/klottery/webflow/images/logo_pwb_left.png" loading="lazy" alt="" class="mlogo"> 
-									<a href="#" class="m_orderbutton w-button">파워볼 주문하기</a>
+									<a href="/klottery/user/buyPower.do" class="m_orderbutton w-button">파워볼 주문하기</a>
 								</div>
 							</div>
 							<div class="menubox mypage">
@@ -209,11 +209,11 @@
 				<a href="/klottery/intro.do" class="topmenulink w-inline-block <c:if test = "${fn:contains(curPage, 'intro.do')}">click</c:if>">
 					<div class="topmenu">복권소개</div>
 				</a> 
-				<a href="#" class="topmenulink w-inline-block _menuBuyGame">
+				<a href="#" class="topmenulink w-inline-block _menuBuyGame <c:if test = "${fn:contains(curPage, 'buy') && !fn:contains(curPage, 'buyGuide')}">click</c:if>">
 					<div class="topmenu">게임구매</div>
 				</a>
 				<div class="lotto_buy_pop click">
-					<a href="#" class="lottobox w-inline-block">
+					<a href="/klottery/user/buyMega.do" class="lottobox w-inline-block">
 						<img src="/klottery/webflow/images/mega_logo.png" loading="lazy"
 						srcset="/klottery/webflow/images/메가밀리언-로고-p-500.png 500w, /klottery/webflow/images/메가밀리언-로고-p-800.png 800w, /klottery/webflow/images/메가밀리언-로고-p-1080.png 1080w, /klottery/webflow/images/mega_logo.png 1200w"
 						sizes="100vw" alt="">
@@ -221,12 +221,12 @@
 						<div class="text-block-23">구매 바로가기</div> 
 					</a> 
 					
-					<a href="#" class="lottobox w-inline-block">
+					<a href="/klottery/user/buyLotto.do" class="lottobox w-inline-block">
 						<img src="/klottery/webflow/images/lotto_logo.png" loading="lazy" alt="">
 						<div class="text-block-22">동행복권</div>
 						<div class="text-block-23">구매 바로가기</div> 
 					</a> 
-					<a href="#" class="lottobox w-inline-block">
+					<a href="/klottery/user/buyPower.do" class="lottobox w-inline-block">
 						<img src="/klottery/webflow/images/power_logo.png" loading="lazy"
 						srcset="/klottery/webflow/images/power_logo-p-500.png 500w, /klottery/webflow/images/power_logo.png 505w"
 						sizes="100vw" alt="" class="image-14">

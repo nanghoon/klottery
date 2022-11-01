@@ -5,5 +5,6 @@
 	<sqlMap resource="egovframework/sqlmap/example/sample/EgovSample_Sample_SQL.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/sample/board.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/sample/member.xml"/>
+	<sqlMap resource="egovframework/sqlmap/example/sample/log.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/sample/lotto.xml"/>
 </sqlMapConfig>

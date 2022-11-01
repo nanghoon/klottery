@@ -168,8 +168,16 @@ public class LottoApi {
 			pShow = getPowerShow();
 			if(pShow){
 				System.out.println("pShow ---- TRUE---------------------------------------");
-				String jackpot = jobj.get("field_prize_amount").toString().replace("$", "").replace(" Million", "");
-				String hitMoney = new BigDecimal(jackpot).multiply(new BigDecimal(1000000)).toPlainString();
+				String jackpot = jobj.get("field_prize_amount").toString().replace("$", "");
+				int money = 1000000;
+				if(jackpot.contains("Billion")){
+					jackpot = jackpot.replace(" Billion", "");
+					money = 1000000000;
+				}else{
+					money = 1000000;
+					jackpot = jackpot.replace(" Million", "");
+				}
+				String hitMoney = new BigDecimal(jackpot).multiply(new BigDecimal(money)).toPlainString();
 				pMoney = hitMoney;
 				String hitMoneyKr = new BigDecimal(hitMoney).multiply(new BigDecimal(rate)).toPlainString();
 				pWon = new BigDecimal(hitMoneyKr).divide(new BigDecimal(100000000) ,0 , BigDecimal.ROUND_DOWN).toPlainString();
