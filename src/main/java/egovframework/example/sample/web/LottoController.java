@@ -35,6 +35,12 @@ public class LottoController {
 		return "user/buyMega";
 	}
 	
+	@RequestMapping(value="/buyPower.do")
+	public String buyPower(Model model){
+		LottoApi.getMainData(model);
+		return "user/buyPower";
+	}
+	
 	// 나의 로또볼 저장하기 
 	@ResponseBody
 	@RequestMapping(value="/saveMyLottoBall.do" , produces="application/json; charset=utf8")
@@ -81,8 +87,12 @@ public class LottoController {
 	@RequestMapping(value="/getMyLottoBallDetail.do" , produces = "application/json; charset=utf8")
 	public String getMyLottoBallDetail(HttpServletRequest request){
 		String idx = request.getParameter("idx");
+		String type = request.getParameter("type");
 		JSONObject obj = new JSONObject();
-		obj.put("data", sampleDAO.select("selectMyLottoBallDetail",idx));
+		EgovMap in = new EgovMap();
+		in.put("idx", idx);
+		in.put("type", type);
+		obj.put("data", sampleDAO.select("selectMyLottoBallDetailByType",in));
 		return obj.toJSONString();
 	}
 	// 나의 로또볼 삭제하기

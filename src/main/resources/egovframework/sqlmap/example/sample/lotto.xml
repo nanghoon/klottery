@@ -143,11 +143,11 @@
             order by idx desc
         ]]>
 	</select>
-	<select id="selectMyLottoBallDetail" resultClass="EgovMap">
+	<select id="selectMyLottoBallDetailByType" resultClass="EgovMap">
         <![CDATA[
             SELECT idx , type , midx , num1,num2,num3,num4,num5,num6,bnum
             FROM mylotto
-            where idx = #idx#
+            where idx = #idx# and type = #type#
         ]]>
 	</select>
 	
