@@ -168,8 +168,14 @@ public class LottoController {
 			in.put("type", type);
 			in.put("cnt", cnt);
 			in.put("kind", gameType);
-			in.put("gtype", selectGame);
-			in.put("num", "");
+			in.put("gtype", selectGame);			
+			in.put("gid", sampleDAO.select("selectLottoLastGidByType",type) == null ? 0 : (int)sampleDAO.select("selectLottoLastGidByType",type)+1);
+			for(int i=0; i<numlist.length; i++){
+				in.put("num", numlist[i]);
+				System.out.println(in);
+				sampleDAO.insert("insertBuyLotto",in);
+			}
+			obj.put("result", "suc");
 			obj.put("msg", "구매 완료되었습니다");
 			return obj.toJSONString();
 		} catch (Exception e) {

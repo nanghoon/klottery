@@ -114,6 +114,27 @@
 				  , now())
 		]]>
 	</insert>	
+	<insert id="insertBuyLotto">
+		<![CDATA[
+			INSERT INTO buylotto
+				( type
+				  , midx
+				  , cnt
+				  , kind
+				  , bdate
+				  , gtype
+				  , num
+				  , gid)
+			VALUES ( #type#
+				  , #midx#
+				  , #cnt#
+				  , #kind#
+				  , now()
+				  , #gtype#
+				  , #num#
+				  , #gid#)
+		]]>
+	</insert>	
 	<select id="selectMyLottoBallList" resultClass="EgovMap">
         <![CDATA[
             SELECT idx , type , midx , num1,num2,num3,num4,num5,num6,bnum
@@ -136,5 +157,15 @@
 			WHERE idx=#idx#
 		]]>
 	</delete>
+	<select id="selectLottoLastGidByType" resultClass="int">
+        <![CDATA[
+            SELECT gid
+            FROM buylotto
+            where type = #type#
+            order by idx desc
+            limit 1
+        ]]>
+	</select> 
+		
 </sqlMap>
 

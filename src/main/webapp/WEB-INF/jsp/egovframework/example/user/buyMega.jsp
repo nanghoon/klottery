@@ -178,6 +178,7 @@ function changeSelectGame(num){
 	setGamePrice();
 }
 function changeGameType(num , self){
+	gameType = Number(num);
 	$(".game_type").removeClass('click');
 	$(self).addClass('click');
 	if(num == 1){ // 자동 선택
@@ -435,18 +436,19 @@ function delMyLotto(idx,id){
 function buy(){
 	$("#buyBtn").attr("href" , "javascript:void(0)");
 	if(selectGame != numlist.length){
-		alert(selectGame+"을 선택해주세요");
+		alert(selectGame+"게임을 선택해주세요");
 		$("#buyBtn").attr("href" , "javascript:buy()");
 		return;
 	}	
-	let data = {'gameType:':gameType , 'numlist':numlist , 'selectGame':selectGame , 'type':1};	
+	let data = {'gameType':gameType , 'numlist':numlist , 'selectGame':selectGame , 'type':1};	
 	$.ajax({
 		type : 'post',
 		data : data,
 		url : '/klottery/user/buyLottoProcess.do',
 		traditional : true,
 		success:function(data){
-			console.log(data);
+			alert(data.msg);
+			if(data.result == 'suc')location.reload();
 		}
 	})	
 }

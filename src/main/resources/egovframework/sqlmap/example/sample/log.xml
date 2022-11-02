@@ -12,6 +12,10 @@
 				  , kind
 				  , point
 		]]>
+		<isEqual property="kind" compareValue="2">
+				, approval
+				, adate
+		</isEqual>
 		<isNotEmpty property="bank">, bank</isNotEmpty>
 		<isNotEmpty property="account">, account</isNotEmpty>
 		<![CDATA[
@@ -20,8 +24,12 @@
 				  , #kind#
 				  , #point#
 		]]>
-		<isNotEmpty property="num6">, #bank#</isNotEmpty>
-		<isNotEmpty property="bnum">, #account#</isNotEmpty>
+		<isEqual property="kind" compareValue="2">
+				, 1
+				, now()
+		</isEqual>
+		<isNotEmpty property="bank">, #bank#</isNotEmpty>
+		<isNotEmpty property="account">, #account#</isNotEmpty>
 		<![CDATA[
 				  , now())
 		]]>

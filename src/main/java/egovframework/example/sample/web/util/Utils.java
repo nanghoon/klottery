@@ -168,6 +168,6 @@ public class Utils {
 		in.put("point", point);
 		if(!Utils.isNull(bank)) in.put("bank", bank);
 		if(!Utils.isNull(account)) in.put("account", account);
-		sampleDAO.insert("insertPointLog");
+		sampleDAO.insert("insertPointLog" ,in);
 	}
 }
