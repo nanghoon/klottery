@@ -49,6 +49,14 @@
 				<li><a href="/klottery/admin/cash/promotion.do"><i class="fa fa-won fa-fw"></i> 유저 프로모션 지급 캐시 설정</a></li>
 				<li><a href="/klottery/admin/cash/hit.do"><i class="fa fa-won fa-fw"></i> 당첨금 세금 /수수료 설정</a></li> -->
 				<li>
+					<a href="javascript:void(0)"><i class="fa fa-trophy fa-fw"></i> 로또 구매 관리<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="/klottery/admin/lotto/buyLotto.do?type=1">메가밀리언 구매 목록</a></li>
+						<li><a href="/klottery/admin/lotto/buyLotto.do?type=2">동행복권 구매 목록</a></li>
+						<li><a href="/klottery/admin/lotto/buyLotto.do?type=3">파워볼 구매 목록</a></li>
+					</ul>
+				</li>
+				<li>
 					<a href="javascript:void(0)"><i class="fa fa-question-circle fa-fw"></i> 고객센터<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="/klottery/admin/board/qnaList.do">1:1문의</a></li>

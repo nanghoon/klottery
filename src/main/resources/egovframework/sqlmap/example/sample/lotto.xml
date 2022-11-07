@@ -166,6 +166,63 @@
             limit 1
         ]]>
 	</select> 
+	<select id="selectBuyLottoList" resultClass="EgovMap">
+        <![CDATA[
+			select buylotto.* , m.id , m.name , r.rdate , r.idx ridx 
+			from buylotto
+			left join member m on m.idx = buylotto.midx
+			left join lotto_result r on r.cnt = buylotto.cnt and r.type = buylotto.type
+			where buylotto.type = #type# 
+        ]]>
+        	<isNotEmpty property="search">
+        		and ( m.id like concat('%' , #search# , '%') or m.name like concat('%' , #search# , '%') )
+        	</isNotEmpty>
+        <![CDATA[
+			group by  midx , buylotto.type , gid ,cnt   
+        ]]>
+        	<isNotEqual property="order" compareValue="bdate">
+        		order by cnt desc ,bdate desc , idx desc
+        	</isNotEqual>
+        	<isEqual property="order" compareValue="bdate">
+        		order by bdate desc , cnte desc , idx desc
+        	</isEqual>
+        <![CDATA[
+			limit #first# , #record#
+		]]>
+	</select>	
+	<select id="selectBuyLottoListCnt" resultClass="int">
+        <![CDATA[
+        	select count(*)
+        	from (
+			select buylotto.* , m.id , m.name , r.rdate , r.idx ridx 
+			from buylotto
+			left join member m on m.idx = buylotto.midx
+			left join lotto_result r on r.cnt = buylotto.cnt and r.type = buylotto.type
+			where buylotto.type = #type# 
+        ]]>
+        	<isNotEmpty property="search">
+        		and ( m.id like concat('%' , #search# , '%') or m.name like concat('%' , #search# , '%') )
+        	</isNotEmpty>
+        <![CDATA[
+			) A
+        ]]>
+	</select>
+	<select id="selectBuyLottoDetailList" resultClass="EgovMap">
+        <![CDATA[
+			select buylotto.* , r.rdate , m.id , m.name ,r.idx ridx , m.point , r.krate
+			from buylotto
+			left join lotto_result r on r.cnt = buylotto.cnt and r.type = #type#
+			left join member m on m.idx = buylotto.midx			
+			where midx = #midx# and buylotto.cnt = #cnt#	and gid = #gid# and buylotto.type = #type#
+        ]]>
+	</select>
+	<update id="updateLottoScan">
+		<![CDATA[
+			UPDATE buylotto
+			SET scan=1 , scanimg = #img#
+			where midx = #midx# and cnt = #cnt#	and gid = #gid# and type = #type#
+		]]>
+	</update>
 		
 </sqlMap>
 
