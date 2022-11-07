@@ -135,7 +135,7 @@ public class LottoApi {
 			}else{
 				lShow = true;
 				lWon = doc.select("#winnerId dl dd strong").text().replace("억원", "");
-				if(Utils.getDayOfWeek().equals("토")||Utils.getDayOfWeek().equals("일")){
+				if((Utils.getDayOfWeek().equals("토") && Utils.getCurrentHour() > 20 )||Utils.getDayOfWeek().equals("일")){
 					System.out.println("토요일 혹은 일요일 -------------------------------------");
 					Scheduler.setLotto = true;
 				}
@@ -188,6 +188,7 @@ public class LottoApi {
 			}
 			
 		} catch (Exception e) {
+			pShow = false;
 			System.out.println("setMainPowerData Err : "+ e);
 		}		
 	}

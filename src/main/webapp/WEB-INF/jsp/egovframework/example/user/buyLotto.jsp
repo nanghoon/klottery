@@ -14,21 +14,20 @@
 <body>
 	<div class="frame">
 		<jsp:include page="../userFrame/top.jsp"></jsp:include>
-		<div class="banner2 m">
+		<div class="banner2">
 			<div class="bannerwrap2">
-				<img src="/klottery/webflow/images/mega_logo.png" loading="lazy" width="237"
-					srcset="/klottery/webflow/images/메가밀리언-로고-p-500.png 500w, /klottery/webflow/images/메가밀리언-로고-p-800.png 800w, /klottery/webflow/images/메가밀리언-로고-p-1080.png 1080w, /klottery/webflow/images/mega_logo.png 1200w"
-					sizes="(max-width: 479px) 92vw, 237px" alt="" class="image-13 m">
-				<div class="text-block-13">메가밀리언 구매하기</div>
+				<img src="/klottery/webflow/images/lotto_logo.png" loading="lazy" width="207" alt=""
+					class="image-13 l">
+				<div class="text-block-13">동행복권 구매하기</div>
 				<div class="text-block-13-copy">
-					<c:if test="${!mShow}">추첨대기중</c:if>
-					<c:if test="${mShow}"><fmt:formatNumber value="${mMoney}"/> $</c:if>
+					<c:if test="${!lShow}">추첨대기중</c:if>
+					<c:if test="${lShow}"><fmt:formatNumber value="${lWon}"/>억원</c:if>
 				</div>
 			</div>
 		</div>
 		<div class="selectgame">
 			<div class="selectgamewrap">
-				<a href="javascript:changeSelectGame(1)" class="link m">1게임</a> 
+				<a href="javascript:changeSelectGame(1)" class="link l">1게임</a> 
 				<a href="javascript:changeSelectGame(2)" class="link">2게임</a>
 				<a href="javascript:changeSelectGame(3)" class="link">3게임</a> 
 				<a href="javascript:changeSelectGame(4)" class="link">4게임</a> 
@@ -71,23 +70,15 @@
 							<a href="javascript:autoClick()" class="link-2">1Game 자동선택</a>
 						</div>
 						<div class="div-block-3">
-							<div class="text-block-18">5개의 화이트볼 선택</div>
+							<div class="text-block-18">6개의 번호 선택</div>
 							<a href="javascript:resetClick()" class="w-inline-block">
 								<img src="/klottery/webflow/images/recycle_bin.png" loading="lazy" width="31" alt="">
 							</a>
 						</div>
 						<div class="wballbox">
-							<c:forEach var="i" begin="1" end="70">
+							<c:forEach var="i" begin="1" end="45">
 								<a href="#" onclick="clickWball(this)" class="wball w-button" id="wb_${i}">${i}</a> 
 							</c:forEach>
-						</div>
-						<div class="div-block-3">
-							<div class="text-block-18">1개의 메가볼 선택</div>
-						</div>
-						<div class="bballbox">
-							<c:forEach var="i" begin="1" end="25">
-								<a href="#" onclick="clickBball(this)" class="bball w-button" id="bb_${i}">${i}</a>
-							</c:forEach> 
 						</div>
 						<div class="div-block-7-copy">
 							<a href="javascript:getClickNum(99)" class="link-3" id="selectNumBtn">선택한 번호 리스트에 담기</a>
@@ -111,7 +102,6 @@
 									<a href="#" class="wball_pick w-button"></a> 
 									<a href="#" class="wball_pick w-button"></a> 
 									<a href="#" class="wball_pick w-button"></a> 
-									<a href="#" class="bball_pick w-button"></a>
 								</div>
 								<div class="num_change">
 									<a href="javascript:udtSelectNum(0)" class="link-block-3 w-inline-block">
@@ -133,7 +123,7 @@
 							<div class="buy_llist">
 								<div class="text-block-21 r">티켓가격(<span id="gameNum"></span>GAME)</div>
 								<div class="div-block-5"></div>
-								<div class="text-block-21 l">5,000 포인트</div>
+								<div class="text-block-21 l">1,000 포인트</div>
 							</div>
 							<div class="buy_llist">
 								<div class="text-block-21 r">결제하실 금액</div>
@@ -172,8 +162,8 @@ var numlist = []; // 선택번호 리스트
 var gameType = 0; // 현재 선택한 게임 방식 : 0 수동 1 자동 2 나의 로또볼 
 var selectGame = 1; // 현재 선택한 게임수
 function changeSelectGame(num){
-	$(".selectgamewrap .link").removeClass('m');
-	$(".selectgamewrap .link").eq(Number(num)-1).addClass('m');
+	$(".selectgamewrap .link").removeClass('l');
+	$(".selectgamewrap .link").eq(Number(num)-1).addClass('l');
 	$("#gameNum").text(num);
 	selectGame = num;
 	numlist.splice(selectGame-1,numlist.lengh-selectGame);
@@ -201,32 +191,21 @@ function changeGameType(num , self){
 	
 }
 function setGamePrice(){
-	let gameMoney = 5000;
+	let gameMoney = 1000;
 	$("#price").text(comma(gameMoney*selectGame)+"포인트");
 }
 function clickWball(self){
 	if($(self).hasClass('click')){ // 이미 클릭 되어있을땐 클릭 해제
 		$(self).removeClass('click');
 	}else{ // 클릭 안되어있으면 클릭
-		if($(".wball.click").length > 4)
-			alert("화이트볼은 5개까지만 선택하실 수 있습니다.")
-		else
-			$(self).addClass('click');
-	}
-}
-function clickBball(self){
-	if($(self).hasClass('click')){ // 이미 클릭 되어있을땐 클릭 해제
-		$(self).removeClass('click');
-	}else{ // 클릭 안되어있으면 클릭 
-		if($(".bball.click").length > 0)
-			alert("메가볼은 1개까지만 선택하실 수 있습니다.")
+		if($(".wball.click").length > 5)
+			alert("번호는 6개까지만 선택하실 수 있습니다.")
 		else
 			$(self).addClass('click');
 	}
 }
 function resetClick(){ // 클릭된 볼 초기화
 	$(".wball").removeClass('click');
-	$(".bball").removeClass('click');
 }
 function autoClick(){ // 볼 자동 선택
 	resetClick();
@@ -234,14 +213,12 @@ function autoClick(){ // 볼 자동 선택
 		let randKind = 0;
 		if(i == 5) randKind = 1;
 		let num = getRandom(randKind);
-		if(i == 5) $("#bb_"+num).addClass('click');
-		else  $("#wb_"+num).addClass('click');
+		$("#wb_"+num).addClass('click');
 	}
 }
-function getRandom(kind){ // 0 화이트볼 , 1 메가볼 
+function getRandom(kind){ // 0 화이트볼 
 	let min = 1;
-	let max = 70;
-	if(kind == 1) max = 25;
+	let max = 45;
 	let rand = 0;
 	while(1){
 		rand = Math.floor(Math.random()*(max-min+1)) + min;
@@ -252,18 +229,13 @@ function getRandom(kind){ // 0 화이트볼 , 1 메가볼
 		}
 	}
 	randArr.push(rand);
-	if(kind == 1)randArr = []; // 메가볼까지 자동했음 초기화
+	if(kind == 1)randArr = []; // 끝까지했으면 초기화 
 	return rand;
 }
 function getClickNum(n){ // 선택한 번호 리스트에 담기 : n - 99 (신규) 외  수정
 	let wlen = $(".wball.click").length;
-	let blen = $(".bball.click").length;
-	if(wlen != 5){
-		alert("화이트볼을 5개 선택해주세요");
-		return;
-	}
-	if(blen != 1){
-		alert("메가볼을 1개 선택해주세요");
+	if(wlen != 6){
+		alert("번호를 6개 선택해주세요");
 		return;
 	}
 	if(n == 99){
@@ -274,14 +246,14 @@ function getClickNum(n){ // 선택한 번호 리스트에 담기 : n - 99 (신�
 		let num = '';
 		for(var i=0; i<wlen; i++)
 			num += $(".wball.click").eq(i).text()+',';
-		num += $(".bball.click").eq(0).text();
+		num = num.slice(0,-1);
 		numlist.push(num);
 		setSelectNumList()
 	}else{
 		let num = '';
-		for(var i=0; i<5; i++)
+		for(var i=0; i<wlen; i++)
 			num += $(".wball.click").eq(i).text()+',';
-		num += $(".bball.click").eq(0).text();
+		num = num.slice(0,-1);
 		numlist.splice(n , 1 , num);
 		setSelectNumList();
 	}
@@ -290,11 +262,10 @@ function getClickNum(n){ // 선택한 번호 리스트에 담기 : n - 99 (신�
 }
 function udtSelectNum(id){ // 선택한 볼 수정
 	resetClick();
-	for(var i=0; i<5; i++){
+	for(var i=0; i<6; i++){
 		let wball = $(".wball_pick").eq(i).text();
 		$("#wb_"+wball).addClass('click');
 	}
-	$("#bb_"+($(".bball_pick").eq(0).text())).addClass('click');
 	$("#selectNumBtn").attr("href","javascript:getClickNum("+id+")");
 }
 function delSelectNum(id){ // 선택한 볼 삭제
@@ -313,15 +284,15 @@ function setSelectNumList(){ // 선택번호 리스트 세팅
 		txt += '<div class="numlist">';
 		if(numlist[i] != null){
 			let numbers = numlist[i].split(',');
-			for(var j=0; j<5; j++){
+			for(var j=0; j<6; j++){
 				txt +='<a href="#" class="wball_pick w-button">'+numbers[j]+'</a>';
 			}
-			txt +='<a href="#" class="bball_pick w-button">'+numbers[5]+'</a></div>';
+			txt +='</div>';
 		}else{
-			for(var j=0; j<5; j++){
+			for(var j=0; j<6; j++){
 				txt +='<a href="#" class="wball_pick w-button"></a>';
 			}
-			txt +='<a href="#" class="bball_pick w-button"></a></div>';
+			txt +='</div>';
 		}
 		txt +='<div class="num_change">';
 		txt +='<a href="javascript:udtSelectNum('+i+')" class="link-block-3 w-inline-block">';
@@ -338,7 +309,7 @@ function getMyLottoSelectNum(idx,id){
 	$.ajax({
 		type : 'get',
 		url : '/klottery/user/getMyLottoBallDetail.do',
-		data : {'idx' : idx , 'type' : 1},
+		data : {'idx' : idx , 'type' : 2},
 		success:function(data){
 			let num = '';
 			num += data.data.num1+',';
@@ -346,8 +317,7 @@ function getMyLottoSelectNum(idx,id){
 			num += data.data.num3+',';
 			num += data.data.num4+',';
 			num += data.data.num5+',';
-			//num += data.data.num6+',';
-			num += data.data.bnum;
+			num += data.data.num6+',';
 			numlist.splice(Number(id) , 1 , num);
 			setSelectNumList();
 			$('._popMyBall').css('display','none');
@@ -364,7 +334,7 @@ function saveMyBall(){ // 로또볼 저장
 	$.ajax({
 		type : 'post',
 		url : '/klottery/user/saveMyLottoBall.do',
-		data : {'numlist':numlist , 'type' : 1},
+		data : {'numlist':numlist , 'type' : 2},
 		traditional : true,
 		success:function(data){
 			alert(data.msg);
@@ -376,7 +346,7 @@ function getMyLotto(id){ // 로또볼 불러오기
 	$.ajax({
 		type : 'get',
 		url : '/klottery/user/getMyLottoBall.do',
-		data : {'type' : 1},
+		data : {'type' : 2},
 		success:function(data){
 			if(data.data.length == 0){
 				$("._popMsg").css('display',"flex");
@@ -391,8 +361,7 @@ function getMyLotto(id){ // 로또볼 불러오기
 					txt += '<a href="#" class="wball_pick w-button">'+data.data[i].num3+'</a>';
 					txt += '<a href="#" class="wball_pick w-button">'+data.data[i].num4+'</a>';
 					txt += '<a href="#" class="wball_pick w-button">'+data.data[i].num5+'</a>';
-					//txt += '<a href="#" class="wball_pick w-button">'+data.data[i].num6+'</a>';
-					txt += '<a href="#" class="bball_pick w-button">'+data.data[i].bnum+'</a>';
+					txt += '<a href="#" class="wball_pick w-button">'+data.data[i].num6+'</a>';
 					txt += '</div>';
 					txt += '<a href="javascript:delMyLotto('+data.data[i].idx+','+id+')" class="link-4">삭제</a>';
 					txt += '<a href="javascript:getMyLottoSelectNum('+data.data[i].idx+','+id+')" class="link-4">불러오기</a>';
@@ -408,7 +377,7 @@ function delMyLotto(idx,id){
 	$.ajax({
 		type : 'get',
 		url : '/klottery/user/delMyLottoBall.do',
-		data : {'idx' : idx , 'type' : 1},
+		data : {'idx' : idx , 'type' : 2},
 		success:function(data){
 			if(data.data.length == 0){
 				$("._popMsg").css('display',"flex");
@@ -423,8 +392,7 @@ function delMyLotto(idx,id){
 					txt += '<a href="#" class="wball_pick w-button">'+data.data[i].num3+'</a>';
 					txt += '<a href="#" class="wball_pick w-button">'+data.data[i].num4+'</a>';
 					txt += '<a href="#" class="wball_pick w-button">'+data.data[i].num5+'</a>';
-					//txt += '<a href="#" class="wball_pick w-button">'+data.data[i].num6+'</a>';
-					txt += '<a href="#" class="bball_pick w-button">'+data.data[i].bnum+'</a>';
+					txt += '<a href="#" class="wball_pick w-button">'+data.data[i].num6+'</a>';
 					txt += '</div>';
 					txt += '<a href="javascript:delMyLotto('+data.data[i].idx+')" class="link-4">삭제</a>';
 					txt += '<a href="#" class="link-4">불러오기</a>';
@@ -443,7 +411,7 @@ function buy(){
 		$("#buyBtn").attr("href" , "javascript:buy()");
 		return;
 	}	
-	let data = {'gameType':gameType , 'numlist':numlist , 'selectGame':selectGame , 'type':1};	
+	let data = {'gameType':gameType , 'numlist':numlist , 'selectGame':selectGame , 'type':2};	
 	$.ajax({
 		type : 'post',
 		data : data,

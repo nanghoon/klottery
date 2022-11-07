@@ -136,6 +136,10 @@ public class Utils {
 		}
 		return korDayOfWeek;
 	}
+	public static int getCurrentHour(){
+		Calendar cal = Calendar.getInstance();
+		return cal.get(Calendar.HOUR_OF_DAY);
+	}	
 	public static JSONArray readJsonArrFromUrl(String url) throws IOException, ParseException {
 		InputStream is = new URL(url).openStream();
 		try {

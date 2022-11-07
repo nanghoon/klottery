@@ -20,7 +20,10 @@
 					srcset="/klottery/webflow/images/power_logo-p-500.png 500w, /klottery/webflow/images/power_logo.png 505w"
 					sizes="(max-width: 479px) 93vw, 402px" alt="" class="image-13">
 				<div class="text-block-13">파워볼 구매하기</div>
-				<div class="text-block-13-copy"><fmt:formatNumber value="${pMoney}"/> $</div>
+				<div class="text-block-13-copy">
+					<c:if test="${!pShow}">추첨대기중</c:if>
+					<c:if test="${pShow}"><fmt:formatNumber value="${pMoney}"/> $</c:if>
+				</div>
 			</div>
 		</div>
 		<div class="selectgame">
@@ -239,7 +242,7 @@ function getRandom(kind){ // 0 화이트볼 , 1 파워볼
 	let min = 1;
 	let max = 69;
 	if(kind == 1) max = 26;
-	let rank = 0;
+	let rand = 0;
 	while(1){
 		rand = Math.floor(Math.random()*(max-min+1)) + min;
 		if(randArr.indexOf(rand) > -1){ // 같은게있으면 그 자리를 뱉어냄 

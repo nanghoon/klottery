@@ -35,6 +35,12 @@ public class LottoController {
 		return "user/buyMega";
 	}
 	
+	@RequestMapping(value="/buyLotto.do")
+	public String buyLotto(Model model){
+		LottoApi.getMainData(model);
+		return "user/buyLotto";
+	}
+	
 	@RequestMapping(value="/buyPower.do")
 	public String buyPower(Model model){
 		LottoApi.getMainData(model);
