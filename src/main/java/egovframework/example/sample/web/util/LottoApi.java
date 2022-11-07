@@ -147,7 +147,7 @@ public class LottoApi {
 	
 	public static void setMainPowerData(){
 		System.out.println("setMainPowerData===============================================================");
-		String url = "http://www.powerball.com/api/v1/estimates/powerball?_format=json";
+		String url = "https://www.calottery.com/api/DrawGameApi/DrawGamePastDrawResults/12/1/20";
 		Document doc = null;
 		try {
 			doc = Jsoup.connect(url)
@@ -157,27 +157,17 @@ public class LottoApi {
 					.userAgent( "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36")
 					.ignoreContentType(true).get();
 			JSONParser jpr = new JSONParser();
-			JSONArray arr = (JSONArray)jpr.parse(doc.text());
-			JSONObject jobj = (JSONObject) arr.get(0);
-			String nextDateTxt = ""+jobj.get("field_next_draw_date");
+			JSONObject jobj = (JSONObject)jpr.parse(doc.text());
+			JSONObject nextDraw = (JSONObject)jobj.get("NextDraw");
+			String nextDateTxt = ""+nextDraw.get("DrawDate");
 			Date nextDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(nextDateTxt);
-			nextDate.setHours(nextDate.getHours()+9);
+			nextDate.setHours(nextDate.getHours()+29);
+			nextDate.setMinutes(nextDate.getMinutes()-1);
 			pDate = new SimpleDateFormat("MM월 dd일 E요일 HH:mm").format(nextDate);
-			
-			// 추첨 대기중인지 
 			pShow = getPowerShow();
 			if(pShow){
 				System.out.println("pShow ---- TRUE---------------------------------------");
-				String jackpot = jobj.get("field_prize_amount").toString().replace("$", "");
-				int money = 1000000;
-				if(jackpot.contains("Billion")){
-					jackpot = jackpot.replace(" Billion", "");
-					money = 1000000000;
-				}else{
-					money = 1000000;
-					jackpot = jackpot.replace(" Million", "");
-				}
-				String hitMoney = new BigDecimal(jackpot).multiply(new BigDecimal(money)).toPlainString();
+				String hitMoney = new BigDecimal(""+nextDraw.get("JackpotAmount")).toPlainString();
 				pMoney = hitMoney;
 				String hitMoneyKr = new BigDecimal(hitMoney).multiply(new BigDecimal(rate)).toPlainString();
 				pWon = new BigDecimal(hitMoneyKr).divide(new BigDecimal(100000000) ,0 , BigDecimal.ROUND_DOWN).toPlainString();
@@ -186,7 +176,6 @@ public class LottoApi {
 					Scheduler.setPower = true;
 				}
 			}
-			
 		} catch (Exception e) {
 			pShow = false;
 			System.out.println("setMainPowerData Err : "+ e);
