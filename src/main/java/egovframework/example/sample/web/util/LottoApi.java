@@ -204,6 +204,7 @@ public class LottoApi {
 				return false;
 		} catch (Exception e) {
 			System.out.println("getPowerShow Err : "+ e);
+			return false;
 		}
 		return true;
 	}
@@ -248,6 +249,7 @@ public class LottoApi {
 				String date = ""+recentData.get("DrawDate");
 				Date hitDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(date);
 				hitDate.setHours(hitDate.getHours()+13);
+				if(type == 3)hitDate.setMinutes(hitDate.getMinutes()-1);
 				in.put("rdate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(hitDate));
 				// 추첨 영상
 				//in.put("vurl", getMegaPowerVideo(type));
