@@ -69,7 +69,7 @@
 								<div class="bball_num">${mega.bnum}</div>
 							</div>
 						</div>
-						<a href="#" class="megabtn w-button">구매하기</a>
+						<a href="/klottery/user/buyMega.do" class="megabtn w-button">구매하기</a>
 					</div>
 				</div>
 				<div class="bannerbox l">
@@ -122,7 +122,7 @@
 								<div class="bball_num">${lotto.bnum}</div>
 							</div>
 						</div>
-						<a href="#" class="lottobtn w-button">구매하기</a>
+						<a href="/klottery/user/buyLotto.do" class="lottobtn w-button">구매하기</a>
 					</div>
 				</div>
 				<div class="bannerbox p">
@@ -177,7 +177,7 @@
 								<div class="bball_num">${power.bnum}</div>
 							</div>
 						</div>
-						<a href="#" class="powerbtn w-button">구매하기</a>
+						<a href="/klottery/user/buyPower.do" class="powerbtn w-button">구매하기</a>
 					</div>
 				</div>
 			</div>
@@ -233,8 +233,8 @@
 		</div>
 		<div class="section">
 			<div class="guidebox">
-				<a href="#" class="buy_guide w-button">구매 가이드</a> <a href="#"
-					class="hit_guide w-button">당첨자 가이드</a>
+				<a href="/klottery/buyGuide.do" class="buy_guide w-button">구매 가이드</a> 
+				<a href="/klottery/hitGuide.do" class="hit_guide w-button">당첨자 가이드</a>
 			</div>
 			<div class="sequenceline"></div>
 			<div class="sequence">

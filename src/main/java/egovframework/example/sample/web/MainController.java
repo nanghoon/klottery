@@ -80,4 +80,57 @@ public class MainController {
 	public String intro(){
 		return "user/intro";
 	}
+	// 당첨가이드
+	@RequestMapping(value="/hitGuide.do")
+	public String hitGuide(){
+		return "user/hitGuide";
+	}
+	// 구매가이드
+	@RequestMapping(value="/buyGuide.do")
+	public String buyGuide(){
+		return "user/buyGuide";
+	}
+	// 마이페이지 
+	@RequestMapping(value="/mypage.do")
+	public String mypage(){
+		return "user/mypage";
+	}
+	@RequestMapping(value="/buyhit.do")
+	public String buyhit(){
+		return "user/buyhit";
+	}
+	@RequestMapping(value="/point.do")
+	public String point(){
+		return "user/point";
+	}
+	@RequestMapping(value="/pointIn.do")
+	public String pointIn(){
+		return "user/pointIn";
+	}
+	@RequestMapping(value="/pointOut.do")
+	public String pointOut(){
+		return "user/pointOut";
+	}
+	@RequestMapping(value="/myinfo.do")
+	public String myinfo(){
+		return "user/myinfo";
+	}
+	@RequestMapping(value="/delete.do")
+	public String delete(){
+		return "user/delete";
+	}
+	
+	// 회사소개 
+	@RequestMapping(value="/company.do")
+	public String company(){
+		return "user/company";
+	}
+	@RequestMapping(value="/terms.do")
+	public String terms(){
+		return "user/terms";
+	}
+	@RequestMapping(value="/privacy.do")
+	public String privacy(){
+		return "user/privacy";
+	}
 }

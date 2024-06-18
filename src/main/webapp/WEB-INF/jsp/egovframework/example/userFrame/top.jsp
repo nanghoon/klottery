@@ -15,7 +15,7 @@
 				<c:if test="${userIdx == null}">
 					<div class="login" onclick="locaion.href='/klottery/login.do'">로그인</div>
 					<div class="join" onclick="locaion.href='/klottery/join.do'">회원가입</div>
-					<a href="javascript:$('.m_menuframe').css('display','flex')" class="m_menubtn w-inline-block">
+					<a href="javascript:momenuOpen()" class="m_menubtn w-inline-block">
 						<img src="/klottery/webflow/images/menu_icon-2_1menu_icon-2.png" loading="lazy" alt="" class="m_menuicon">
 					</a>
 				</c:if>
@@ -25,7 +25,7 @@
 							<img src="/klottery/webflow/images/4213460_account_avatar_head_person_profile_icon_14213460_account_avatar_head_person_profile_icon.png"
 								loading="lazy" alt="" class="user">
 						</div>
-						<a href="javascript:$('.m_menuframe').css('display','flex')" class="m_menubtn w-inline-block">
+						<a href="javascript:momenuOpen()" class="m_menubtn w-inline-block">
 							<img src="/klottery/webflow/images/menu_icon-2_1menu_icon-2.png" loading="lazy" alt="" class="m_menuicon">
 						</a>
 					</div>
@@ -41,12 +41,12 @@
 					</div>
 					<div class="m_menucontainer">
 						<div class="m_tabwrap">
-							<div class="m_tab click"></div>
-							<div class="m_tab _2"></div>
-							<div class="m_tab _4"></div>
-							<div class="m_tab _5"></div>
+							<div class="m_tab" onclick="javascript:momenu(0)"></div>
+							<div class="m_tab _2" onclick="javascript:momenu(1)"></div>
+							<div class="m_tab _4" onclick="javascript:momenu(2)"></div>
+							<div class="m_tab _5" onclick="javascript:momenu(3)"></div>
 							<c:if test="${userIdx != null}">
-								<a href="#" class="m_logoutbtn w-button">로그아웃</a>
+								<a href="/klottery/logout.do" class="m_logoutbtn w-button">로그아웃</a>
 							</c:if>
 						</div>
 						<div class="menuboxwrap">
@@ -129,10 +129,10 @@
 										<a href="/klottery/user/qnaList.do" class="menubtn _2 w-inline-block">
 											<div class="f_txt m">1:1상담</div>
 										</a> 
-										<a href="#" class="menubtn _2 w-inline-block">
+										<a href="/klottery/buyGuide.do" class="menubtn _2 w-inline-block">
 											<div class="f_txt m">구매가이드</div>
 										</a> 
-										<a href="#" class="menubtn _2 w-inline-block">
+										<a href="/klottery/hitGuide.do" class="menubtn _2 w-inline-block">
 											<div class="f_txt m">당첨가이드</div>
 										</a>
 									</div>
@@ -142,40 +142,40 @@
 										<span class="text-span-37">〉</span>마이페이지
 									</div>
 								</a> 
-								<a href="#" class="menubtn _2 w-inline-block">
+								<a href="/klottery/mypage.do" class="menubtn _2 w-inline-block">
 									<div class="f_txt m">마이페이지홈</div>
 								</a> 
-								<a href="#" class="menubtn _2 w-inline-block">
+								<a href="/klottery/buyhit.do" class="menubtn _2 w-inline-block">
 									<div class="f_txt m">구매/당첨내역</div>
 								</a> 
-								<a href="#" class="menubtn _2 w-inline-block">
+								<a href="/klottery/point.do" class="menubtn _2 w-inline-block">
 									<div class="f_txt m">포인트내역</div>
 								</a> 
-								<a href="#" class="menubtn _2 w-inline-block">
+								<a href="/klottery/pointIn.do" class="menubtn _2 w-inline-block">
 									<div class="f_txt m">포인트충전</div>
 								</a> 
-								<a href="#" class="menubtn _2 w-inline-block">
+								<a href="/klottery/pointOut.do" class="menubtn _2 w-inline-block">
 									<div class="f_txt m">출금하기</div>
 								</a> 
-								<a href="#" class="menubtn _2 w-inline-block">
+								<a href="/klottery/myinfo.do" class="menubtn _2 w-inline-block">
 									<div class="f_txt m">개인정보</div>
 								</a>
 							</div>
 							<div class="menubox introduce">
 								<div class="m_container">
-									<a href="#" class="menubtn w-inline-block">
+									<a href="/klottery/company.do" class="menubtn w-inline-block">
 										<div class="f_txt m">
 											<span class="text-span-37">〉</span>회사소개
 										</div>
 									</a>
 								</div>
 								<div class="m_container">
-									<a href="#" class="menubtn w-inline-block">
+									<a href="/klottery/terms.do" class="menubtn w-inline-block">
 										<div class="f_txt m">
 											<span class="text-span-37">〉</span>이용약관
 										</div>
 									</a> 
-									<a href="#" class="menubtn w-inline-block">
+									<a href="/klottery/privacy.do" class="menubtn w-inline-block">
 										<div class="f_txt m">
 											<span class="text-span-37">〉</span>개인정보처리방침
 										</div>
@@ -252,7 +252,7 @@
 			</c:if>
 			<c:if test="${userIdx != null}">
 				<div class="topmenubox">
-					<a href="#" class="topmenubtn w-button click">마이페이지 </a> 
+					<a href="/klottery/mypage.do" class="topmenubtn w-button click">마이페이지 </a> 
 					<a href="/klottery/logout.do" class="topmenubtn w-button">로그아웃</a>
 				</div>
 			</c:if>
@@ -267,4 +267,20 @@ $(document).ready(function(){
 		$(".lotto_buy_pop").css("display","none");
 	})
 })
+
+function momenuOpen(){
+	$(".m_tab").removeClass('click');
+	$(".m_tab").eq(0).addClass('click');
+	$(".menubox").css('display','none');
+	$(".menubox").eq(0).css('display','block');
+	$('.m_menuframe').css('display','flex');
+}
+
+function momenu(i){
+	$(".m_tab").removeClass('click');
+	$(".m_tab").eq(i).addClass('click');
+	$(".menubox").css('display','none');
+	$(".menubox").eq(i).css('display','block');
+	
+}
 </script>

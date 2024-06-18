@@ -10,16 +10,16 @@
 			</a>
 			<div class="bottom_info">
 				<div class="bottom_link">
-					<a href="#" class="bottom_link_txt right left w-inline-block">
+					<a href="/klottery/company.do" class="bottom_link_txt right left w-inline-block">
 						<div class="text-block-4">회사소개</div>
 					</a> 
-					<a href="#" class="bottom_link_txt right w-inline-block">
+					<a href="/klottery/terms.do" class="bottom_link_txt right w-inline-block">
 						<div class="text-block-5">이용약관</div>
 					</a> 
-					<a href="#" class="bottom_link_txt right w-inline-block">
+					<a href="/klottery/privacy.do" class="bottom_link_txt right w-inline-block">
 						<div class="text-block-4">개인정보 처리방침</div>
 					</a> 
-					<a href="#" class="bottom_link_txt w-inline-block">
+					<a href="/klottery/faqList.do" class="bottom_link_txt w-inline-block">
 						<div class="text-block-4">FAQ</div>
 					</a>
 				</div>
